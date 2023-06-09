@@ -9,7 +9,6 @@ documentation = "http://docs.rs/bwrap"
 license = "MIT OR GPL-3.0-or-later"
 keywords = ["no_std", "wrap", "text", "80-column", "formatting"]
 categories = ["no-std", "text-processing", "embedded", "accessibility"]
-include = ["LICENSE-MIT", "LICENSE-GPL"]
 exclude = ["*.bak"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
