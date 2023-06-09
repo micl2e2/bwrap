@@ -1,0 +1,25 @@
+[package]
+name = "bwrap"
+version = "0.1.0-beta1"
+authors = ["Michael Lee <imichael2e2@proton.me>"]
+edition = "2018"
+description = "A text-wrapping library."
+repository = "http://github.com/imichael2e2/bwrap"
+documentation = "http://docs.rs/bwrap"
+license = "MIT OR GPL-3.0-or-later"
+keywords = ["no_std", "wrap", "text", "80-column", "formatting"]
+categories = ["no-std", "text-processing", "embedded", "accessibility"]
+include = ["LICENSE-MIT", "LICENSE-GPL"]
+exclude = ["*.bak"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+use_std = []
+
+[dependencies]
+unicode-width = "0.1.10"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "doc_cfg"]
