@@ -24,6 +24,7 @@ pub enum WrapStyle<'a> {
     NoBreakAppend(&'a str, ExistNlPref),
     MayBreak,
     MayBreakPrepend(&'a str),
+    MayBreakAppend(&'a str),
 }
 
 #[derive(PartialEq)]
@@ -74,6 +75,7 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
             }
             WrapStyle::MayBreak => self.wrap_may_break(),
             WrapStyle::MayBreakPrepend(prepend_what) => self.wrap_may_break_prepend(prepend_what),
+            WrapStyle::MayBreakAppend(append_what) => self.wrap_may_break_append(append_what),
         }
     }
 
@@ -437,6 +439,86 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
                         } else {
                             buf_aux1.push_within(0xa, pi + len_nor + aux4, ci + len_nor + aux4);
                         }
+                        buf_aux2.push((pi, width_seen - width_just_seen, Normal));
+                    }
+                }
+
+                pi = ci;
+            }
+
+            if !is_last_cp {
+                buf_aux1.push(bf_bytes[ci]);
+                if bf_bytes[ci] == 0xa {
+                    buf_aux2.push((ci, width_seen, Abnormal));
+                }
+            }
+        }
+
+        Ok(buf_aux1.len())
+    }
+
+    pub(crate) fn wrap_may_break_append(&mut self, append_str: &str) -> Result<usize> {
+        use Aux2ElemKind::{Abnormal, Normal};
+
+        let bf_bytes = self.before.as_bytes();
+        let bf_len = bf_bytes.len();
+        let max_width = self.max_width;
+        let len_append = append_str.len();
+
+        self.is_af_buf_suffice(bf_len + (bf_len / max_width) * (1 + len_append))?;
+
+        let mut backing_buf_aux2 = (usize::MAX, usize::MAX, Aux2ElemKind::Normal);
+
+        let mut buf_aux1 = Aux1Buf::new(self.after);
+        let mut buf_aux2 = Aux2Buf::new(&mut backing_buf_aux2);
+        let mut len_appended = 0;
+
+        let bytes_append = append_str.as_bytes();
+        let mut width_seen = 0usize;
+
+        let mut pi = 0;
+        buf_aux1.push(bf_bytes[0]);
+
+        for ci in 1..bf_len + 1 {
+            let is_last_cp = ci == bf_len;
+
+            if is_last_cp
+                || (!is_last_cp && (bf_bytes[ci] < 0b10000000 || bf_bytes[ci] >= 0b11000000))
+            {
+                let width_just_seen = UnicodeWidthStr::width(&self.before[pi..ci]);
+                width_seen += width_just_seen;
+
+                if buf_aux2.len() == 0 {
+                    if width_seen == max_width && !is_last_cp {
+                        if bf_bytes[ci] != 0xa {
+                            buf_aux1.push(0xa);
+                            buf_aux1.push_many(bytes_append);
+                            len_appended += len_append;
+                            buf_aux2.push((ci, width_seen, Normal));
+                        }
+                    } else if width_seen > max_width {
+                        buf_aux1.push_within(0xa, pi, ci);
+                        buf_aux1.push_many_at(bytes_append, pi + 1);
+                        len_appended += len_append;
+                        buf_aux2.push((pi, width_seen - width_just_seen, Normal));
+                    }
+                } else {
+                    let most_recent_aux2 = buf_aux2.last();
+                    let (_, mark_aux2_i, _) = most_recent_aux2;
+                    let cl_width = width_seen - mark_aux2_i;
+                    if cl_width == max_width && !is_last_cp {
+                        if bf_bytes[ci] != 0xa {
+                            buf_aux1.push(0xa);
+                            buf_aux1.push_many(bytes_append);
+                            len_appended += len_append;
+                            buf_aux2.push((ci, width_seen, Normal));
+                        }
+                    } else if cl_width > max_width {
+                        let len_nor = buf_aux2.len_nor();
+                        let len_aux = len_nor + len_appended;
+                        buf_aux1.push_within(0xa, pi + len_aux, ci + len_aux);
+                        buf_aux1.push_many_at(bytes_append, pi + len_aux + 1);
+                        len_appended += len_append;
                         buf_aux2.push((pi, width_seen - width_just_seen, Normal));
                     }
                 }

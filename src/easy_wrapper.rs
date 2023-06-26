@@ -93,6 +93,21 @@ impl<'bf> EasyWrapper<'bf> {
 
                 Ok(String::from_utf8_lossy(&self.after[..af_len]))
             }
+
+            WrapStyle::MayBreakAppend(append_what) => {
+                let bf_len = self.before.len();
+                let max_width = self.max_width;
+
+                self.after.resize(
+                    bf_len + bf_len / max_width + append_what.len() * (bf_len / max_width),
+                    0,
+                );
+
+                let mut wrapper = Wrapper::new(self.before, self.max_width, &mut self.after)?;
+                let af_len = wrapper.wrap_may_break_append(append_what)?;
+
+                Ok(String::from_utf8_lossy(&self.after[..af_len]))
+            }
         }
     }
 }

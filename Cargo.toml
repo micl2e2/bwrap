@@ -1,6 +1,6 @@
 [package]
 name = "bwrap"
-version = "0.1.0-beta1"
+version = "0.1.0-beta2"
 authors = ["Michael Lee <imichael2e2@proton.me>"]
 edition = "2018"
 description = "A text-wrapping library."
