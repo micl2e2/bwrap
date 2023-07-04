@@ -44,7 +44,7 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
         let bf_len = before.len();
         let af_len = after.len();
 
-        if af_len == 0 || bf_len == 0 {
+        if bf_len != 0 && af_len == 0 {
             return Err(WrapError::InsufficentBufferSize(bf_len, af_len, 0));
         }
 
@@ -102,6 +102,9 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
         let bf_len = bf_bytes.len();
         let max_width = self.max_width;
 
+        if bf_len == 0 {
+            return Ok(0);
+        }
         self.is_af_buf_suffice(bf_len)?;
 
         let mut backing_buf_aux2 = (usize::MAX, usize::MAX, Aux2ElemKind::Normal);
@@ -187,6 +190,9 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
             return Err(WrapError::InvalidWidth);
         }
 
+        if bf_len == 0 {
+            return Ok(0);
+        }
         self.is_af_buf_suffice(
             bf_len + bf_len / max_width + append_str.len() * (bf_len / max_width),
         )?;
@@ -285,6 +291,9 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
         let bf_len = bf_bytes.len();
         let max_width = self.max_width;
 
+        if bf_len == 0 {
+            return Ok(0);
+        }
         self.is_af_buf_suffice(bf_len + bf_len / max_width)?;
 
         let mut backing_buf_aux2 = (usize::MAX, usize::MAX, Aux2ElemKind::Normal);
@@ -357,6 +366,9 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
             return Err(WrapError::InvalidWidth);
         }
 
+        if bf_len == 0 {
+            return Ok(0);
+        }
         self.is_af_buf_suffice(
             bf_len + bf_len / max_width + prepend_str.len() * (bf_len / max_width),
         )?;
