@@ -1,9 +1,9 @@
 [package]
 name = "bwrap"
-version = "0.1.0-beta3"
+version = "0.1.0-beta4"
 authors = ["Michael Lee <imichael2e2@proton.me>"]
 edition = "2021"
-description = "A text-wrapping library."
+description = "A library for wrapping text."
 repository = "https://github.com/imichael2e2/bwrap"
 documentation = "https://docs.rs/bwrap"
 license = "MIT OR GPL-3.0-or-later"
@@ -17,7 +17,7 @@ exclude = ["*.bak"]
 use_std = []
 
 [dependencies]
-unicode-width = "0.1.10"
+unicode-width = "0.1.0"
 
 [package.metadata.docs.rs]
 all-features = true

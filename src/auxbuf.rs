@@ -25,6 +25,9 @@ impl<'a> Aux1Buf<'a> {
     }
 
     pub(crate) fn push(&mut self, byte: u8) {
+        if self.nexi >= self.inner.len() {
+            panic!("buffer overflow {} {}", self.nexi, self.inner.len());
+        }
         self.inner[self.nexi] = byte;
         self.nexi += 1;
     }
