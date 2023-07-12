@@ -75,5 +75,16 @@ mod ascii {
         Ok(())
     }
 
+    #[test]
+    fn _7() -> Result<()> {
+        let before = "- \u{1b}[1mFrom CNN\u{1b}[0m: Each of the four behaviors, practiced on their own, increased the odds of what the researchers termed \"successful aging\" by 30% to 50%.";
+        let mut wrapper = EasyWrapper::new(before, 78)?;
+        let after =
+            wrapper.wrap_use_style(WrapStyle::NoBreakAppend("  ", ExistNlPref::KeepTrailSpc))?;
+        assert_eq!(&after, "- \u{1b}[1mFrom CNN\u{1b}[0m: Each of the four behaviors, practiced on their own,\n  increased the odds of what the researchers termed \"successful aging\" by 30% to\n  50%.");
+
+        Ok(())
+    }
+
     //-
 }

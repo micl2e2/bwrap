@@ -193,9 +193,7 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
         if bf_len == 0 {
             return Ok(0);
         }
-        self.is_af_buf_suffice(
-            bf_len + bf_len / max_width + append_str.len() * (bf_len / max_width),
-        )?;
+        self.is_af_buf_suffice(bf_len + bf_len * append_str.len())?;
 
         let mut backing_buf_aux2 = (usize::MAX, usize::MAX, Aux2ElemKind::Normal);
         let mut backing_buf_aux3 = (usize::MAX, usize::MAX);

@@ -56,10 +56,7 @@ impl<'bf> EasyWrapper<'bf> {
                 let bf_len = self.before.len();
                 let max_width = self.max_width;
 
-                self.after.resize(
-                    bf_len + bf_len / max_width + append_what.len() * (bf_len / max_width),
-                    0,
-                );
+                self.after.resize(bf_len + bf_len * append_what.len(), 0);
 
                 let mut wrapper = Wrapper::new(self.before, self.max_width, &mut self.after)?;
                 let af_len = wrapper.wrap_no_break_append(append_what, enl_pref)?;
