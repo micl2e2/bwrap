@@ -60,6 +60,10 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
         })
     }
 
+    pub fn wrap(&mut self) -> Result<usize> {
+        self.wrap_use_style(WrapStyle::NoBrk(None, ExistNlPref::KeepTrailSpc))
+    }
+
     pub fn wrap_use_style(&mut self, style: WrapStyle) -> Result<usize> {
         match style {
             WrapStyle::NoBrk(append_what, enl_pref) => {
