@@ -14,7 +14,7 @@ mod ascii {
         let before = "hhhhh";
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after =
-            wrapper.wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            wrapper.wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after, "hhhhh");
 
         Ok(())
@@ -25,7 +25,7 @@ mod ascii {
         let before = "hhhhh hhhhh";
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after =
-            wrapper.wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            wrapper.wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after, "hhhhh\n---hhhhh");
 
         Ok(())
@@ -36,7 +36,7 @@ mod ascii {
         let before = "hh     hhh";
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after =
-            wrapper.wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            wrapper.wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after, "hh \n---hhh");
 
         Ok(())
@@ -47,7 +47,7 @@ mod ascii {
         let before = "hhhhh hhhhh hhhhh";
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after =
-            wrapper.wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            wrapper.wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after, "hhhhh\n---hhhhh\n---hhhhh");
 
         Ok(())
@@ -58,7 +58,7 @@ mod ascii {
         let before = "hhhhh   hhhhh   hhhhh";
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after =
-            wrapper.wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            wrapper.wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after, "hhhhh\n---hhhhh\n---hhhhh");
 
         Ok(())
@@ -69,7 +69,7 @@ mod ascii {
         let before = "   hhhhh   hhhhh   hhhhh   ";
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after =
-            wrapper.wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            wrapper.wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after, "  \n---hhhhh\n---hhhhh\n---hhhhh\n---");
 
         Ok(())
@@ -80,7 +80,7 @@ mod ascii {
         let before = "- \u{1b}[1mFrom CNN\u{1b}[0m: Each of the four behaviors, practiced on their own, increased the odds of what the researchers termed \"successful aging\" by 30% to 50%.";
         let mut wrapper = EasyWrapper::new(before, 78)?;
         let after =
-            wrapper.wrap_use_style(WrapStyle::NoBreakAppend("  ", ExistNlPref::KeepTrailSpc))?;
+            wrapper.wrap_use_style(WrapStyle::NoBrk(Some("  "), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after, "- \u{1b}[1mFrom CNN\u{1b}[0m: Each of the four behaviors, practiced on their own,\n  increased the odds of what the researchers termed \"successful aging\" by 30% to\n  50%.");
 
         Ok(())

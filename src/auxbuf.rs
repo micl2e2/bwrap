@@ -9,16 +9,16 @@
 // compliance with either of the licenses.
 //
 
-// Aux1 //
+// ByteSlcBuf //
 
-pub(crate) struct Aux1Buf<'a> {
+pub(crate) struct ByteSlcBuf<'a> {
     nexi: usize,
     inner: &'a mut [u8],
 }
 
-impl<'a> Aux1Buf<'a> {
+impl<'a> ByteSlcBuf<'a> {
     pub(crate) fn new(slc: &'a mut [u8]) -> Self {
-        Aux1Buf {
+        ByteSlcBuf {
             nexi: 0,
             inner: slc,
         }
@@ -90,34 +90,34 @@ impl<'a> Aux1Buf<'a> {
     }
 }
 
-// Aux2 //
+// HypoNlBuf //
 
 #[derive(Debug, Copy, Clone)]
-pub(crate) enum Aux2ElemKind {
-    Abnormal,
-    Normal,
+pub(crate) enum HypoNlKind {
+    Existing,
+    NewOne,
 }
 
-pub(crate) struct Aux2Buf<'a> {
+pub(crate) struct HypoNlBuf<'a> {
     nexi: usize,
-    inner: &'a mut (usize, usize, Aux2ElemKind),
-    n_abn: usize,
+    inner: &'a mut (usize, usize, HypoNlKind),
+    n_exis: usize,
 }
 
-impl<'a> Aux2Buf<'a> {
-    pub(crate) fn new(slc: &'a mut (usize, usize, Aux2ElemKind)) -> Self {
-        Aux2Buf {
+impl<'a> HypoNlBuf<'a> {
+    pub(crate) fn new(slc: &'a mut (usize, usize, HypoNlKind)) -> Self {
+        HypoNlBuf {
             nexi: 0,
             inner: slc,
-            n_abn: 0,
+            n_exis: 0,
         }
     }
 
-    pub(crate) fn push(&mut self, arg: (usize, usize, Aux2ElemKind)) {
+    pub(crate) fn push(&mut self, arg: (usize, usize, HypoNlKind)) {
         *self.inner = (arg.0, arg.1, arg.2);
         self.nexi += 1;
-        if let Aux2ElemKind::Abnormal = arg.2 {
-            self.n_abn += 1;
+        if let HypoNlKind::Existing = arg.2 {
+            self.n_exis += 1;
         }
     }
 
@@ -125,25 +125,25 @@ impl<'a> Aux2Buf<'a> {
         self.nexi
     }
 
-    pub(crate) fn len_nor(&self) -> usize {
-        self.nexi - self.n_abn
+    pub(crate) fn len_newones(&self) -> usize {
+        self.nexi - self.n_exis
     }
 
-    pub(crate) fn last(&self) -> &(usize, usize, Aux2ElemKind) {
+    pub(crate) fn last(&self) -> &(usize, usize, HypoNlKind) {
         &self.inner
     }
 }
 
-// Aux3 //
+// ExisSpcBuf //
 
-pub(crate) struct Aux3Buf<'a> {
+pub(crate) struct ExisSpcBuf<'a> {
     nexi: usize,
     inner: &'a mut (usize, usize),
 }
 
-impl<'a> Aux3Buf<'a> {
+impl<'a> ExisSpcBuf<'a> {
     pub(crate) fn new(slc: &'a mut (usize, usize)) -> Self {
-        Aux3Buf {
+        ExisSpcBuf {
             nexi: 0,
             inner: slc,
         }

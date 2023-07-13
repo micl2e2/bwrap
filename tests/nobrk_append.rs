@@ -11,7 +11,7 @@ mod ascii {
         let before = "hhhhh";
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
 
         assert_eq!(&after[..len], b"hhhhh");
 
@@ -23,7 +23,7 @@ mod ascii {
         let before = "hhhhh hhhhh";
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
 
         assert_eq!(&after[..len], b"hhhhh\n---hhhhh");
         Ok(())
@@ -34,7 +34,7 @@ mod ascii {
         let before = "hh     hhh";
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"hh \n---hhh");
         Ok(())
     }
@@ -44,7 +44,7 @@ mod ascii {
         let before = "hhhhh hhhhh hhhhh";
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"hhhhh\n---hhhhh\n---hhhhh");
         Ok(())
     }
@@ -54,7 +54,7 @@ mod ascii {
         let before = "hhhhh   hhhhh   hhhhh";
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"hhhhh\n---hhhhh\n---hhhhh");
         Ok(())
     }
@@ -64,7 +64,7 @@ mod ascii {
         let before = "   hhhhh   hhhhh   hhhhh   ";
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"  \n---hhhhh\n---hhhhh\n---hhhhh\n---");
         Ok(())
     }
@@ -81,12 +81,12 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"hhh\nhh");
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], b"hhh\nhh");
         Ok(())
     }
@@ -97,12 +97,12 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"hhhhh\n\n---hhhhh");
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], b"hhhhh\nhhhhh");
         Ok(())
     }
@@ -113,12 +113,12 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"hh \n   \n---hhh");
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], b"hh \nhhh");
         Ok(())
     }
@@ -129,12 +129,12 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"hh \n  \n \n---hhh");
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], b"hh \n\nhhh");
         Ok(())
     }
@@ -145,12 +145,12 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"hh\nhhh\n---hhh\nhh\n\n---hhhhh");
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], b"hh\nhhh\n---hhh\nhh\nhhhhh");
         Ok(())
     }
@@ -161,7 +161,7 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             b"hh\n\n\nhhh\n---hhh\n\n\nhh\n\n\n  \n---hhhhh"
@@ -169,7 +169,7 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], b"hh\n\n\nhhh\n---hhh\n\n\nhh\n\n\nhhhhh");
         Ok(())
     }
@@ -180,12 +180,12 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], b"\nhhhhh\n---hhhhh\n---hhhhh\n");
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], b"\nhhhhh\n---hhhhh\n---hhhhh\n");
         Ok(())
     }
@@ -196,7 +196,7 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             b"\nh\nh\nh\nh\nh  \n---h\nh\nh\nh\nh  \n---h\nh\nh\nh\nh\n"
@@ -204,7 +204,7 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             b"\nh\nh\nh\nh\nh  \n---h\nh\nh\nh\nh  \n---h\nh\nh\nh\nh\n"
@@ -218,7 +218,7 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             b"\nh\nh\nh\nh\nh  \n---h\nh\nh\nh\nh  \n---h\nh\nh\nh\nh\n   "
@@ -226,7 +226,7 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             b"\nh\nh\nh\nh\nh  \n---h\nh\nh\nh\nh  \n---h\nh\nh\nh\nh\n"
@@ -240,7 +240,7 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             b"\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\n"
@@ -248,7 +248,7 @@ mod ascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             b"\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\n"
@@ -268,12 +268,12 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨＨＨ".as_bytes());
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨＨＨ".as_bytes());
         Ok(())
     }
@@ -284,12 +284,12 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes());
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes());
         Ok(())
     }
@@ -300,7 +300,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨＨＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes()
@@ -308,7 +308,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨＨＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes()
@@ -322,7 +322,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨＨＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes()
@@ -330,7 +330,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨＨＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes()
@@ -344,7 +344,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨＨＨ\n---ＨＨＨhＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes()
@@ -352,7 +352,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨＨＨ\n---ＨＨＨhＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes()
@@ -366,7 +366,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨＨＨ\n---ＨＨＨhＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes()
@@ -374,7 +374,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("---", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("---"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨＨＨ\n---ＨＨＨhＨ\n---ＨＨＨＨＨ\n---ＨＨＨＨＨ".as_bytes()
@@ -388,7 +388,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 2, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("--", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("--"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "  \n--ＨＨＨＨＨ\n--ＨＨＨhＨ\n--ＨＨＨＨＨ\n--ＨＨＨＨＨ\n--".as_bytes()
@@ -396,7 +396,7 @@ mod nonascii {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 2, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("--", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("--"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "  \n--ＨＨＨＨＨ\n--ＨＨＨhＨ\n--ＨＨＨＨＨ\n--ＨＨＨＨＨ\n--".as_bytes()
@@ -414,12 +414,12 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨ\nＨＨ".as_bytes());
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨ\nＨＨ".as_bytes());
         Ok(())
     }
@@ -430,12 +430,12 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨ\nＨＨ\n⤷⤷⤷ＨＨＨＨＨ".as_bytes());
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨ\nＨＨ\n⤷⤷⤷ＨＨＨＨＨ".as_bytes());
         Ok(())
     }
@@ -446,12 +446,12 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨ\nＨＨ Ｈ\nＨＨＨＨ".as_bytes());
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(&after[..len], "ＨＨＨ\nＨＨ Ｈ\nＨＨＨＨ".as_bytes());
         Ok(())
     }
@@ -462,7 +462,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨ\nＨＨ Ｈ\nＨＨＨＨ\n⤷⤷⤷ＨＨＨ\nＨＨ".as_bytes()
@@ -470,7 +470,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨ\nＨＨ Ｈ\nＨＨＨＨ\n⤷⤷⤷ＨＨＨ\nＨＨ".as_bytes()
@@ -484,7 +484,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨ\nＨＨ Ｈ\n\n⤷⤷⤷ＨＨＨＨ\n⤷⤷⤷ＨＨＨ\nＨＨ".as_bytes()
@@ -492,7 +492,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨ\nＨＨ Ｈ\nＨＨＨＨ\n⤷⤷⤷ＨＨＨ\nＨＨ".as_bytes()
@@ -506,7 +506,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨ\nＨＨ\n⤷⤷⤷Ｈh\nＨＨＨ\n⤷⤷⤷ＨhＨ\nＨＨ".as_bytes()
@@ -514,7 +514,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨ\nＨＨ\n⤷⤷⤷Ｈh\nＨＨＨ\n⤷⤷⤷ＨhＨ\nＨＨ".as_bytes()
@@ -528,7 +528,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨ\n ＨＨ\n⤷⤷⤷Ｈh\nＨＨＨ\n⤷⤷⤷ＨhＨ\n ＨＨ\n ".as_bytes()
@@ -536,7 +536,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "ＨＨＨ\nＨＨ\n⤷⤷⤷Ｈh\nＨＨＨ\n⤷⤷⤷ＨhＨ\nＨＨ\n".as_bytes()
@@ -550,7 +550,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "\nＨ\nＨ\nＨ\nＨ\nＨ Ｈ\nＨ\nＨ\nＨ\nＨ Ｈ\nＨ\nＨ\nＨ\nＨ\n".as_bytes()
@@ -558,7 +558,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "\nＨ\nＨ\nＨ\nＨ\nＨ Ｈ\nＨ\nＨ\nＨ\nＨ Ｈ\nＨ\nＨ\nＨ\nＨ\n".as_bytes()
@@ -572,7 +572,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 427];
         let len = Wrapper::new(before, 2, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "\nＨ\nＨ\nＨ\nＨ\nＨ\n⤷⤷Ｈ\nＨ\nＨ\nＨ\nＨ\n⤷⤷Ｈ\nＨ\nＨ\nＨ\nＨ\n".as_bytes()
@@ -580,7 +580,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 427];
         let len = Wrapper::new(before, 2, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "\nＨ\nＨ\nＨ\nＨ\nＨ\n⤷⤷Ｈ\nＨ\nＨ\nＨ\nＨ\n⤷⤷Ｈ\nＨ\nＨ\nＨ\nＨ\n".as_bytes()
@@ -595,7 +595,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 660];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             " \nＨ\n Ｈ\nＨ\nＨ\nＨ\n⤷⤷⤷Ｈ\nＨ\n Ｈ\nＨ\nＨ\n⤷⤷⤷Ｈ\nＨ\n Ｈ\nＨ\nＨ\n ".as_bytes()
@@ -603,7 +603,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 660];
         let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             " \nＨ\nＨ\nＨ\nＨ\nＨ\n⤷⤷⤷Ｈ\nＨ\nＨ\nＨ\nＨ\n⤷⤷⤷Ｈ\nＨ\nＨ\nＨ\nＨ\n".as_bytes()
@@ -617,7 +617,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 4, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "    \n⤷⤷⤷ＨＨＨＨ\nＨ  \n⤷⤷⤷ＨＨＨhＨ\n⤷⤷⤷ＨＨＨＨＨ\n⤷⤷⤷".as_bytes()
@@ -625,7 +625,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 4, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "    \n⤷⤷⤷ＨＨＨＨ\nＨ  \n⤷⤷⤷ＨＨＨhＨ\n⤷⤷⤷ＨＨＨＨＨ\n⤷⤷⤷".as_bytes()
@@ -640,7 +640,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 4, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "    \n⤷⤷⤷ＨＨＨＨ\nＨ  \n⤷⤷⤷ＨＨＨhＨ\n⤷⤷⤷ＨＨＨＨＨ\n⤷⤷⤷\n   ".as_bytes()
@@ -648,7 +648,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 4, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "    \n⤷⤷⤷ＨＨＨＨ\nＨ  \n⤷⤷⤷ＨＨＨhＨ\n⤷⤷⤷ＨＨＨＨＨ\n⤷⤷⤷\n".as_bytes()
@@ -663,7 +663,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 4, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::KeepTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::KeepTrailSpc))?;
         assert_eq!(
             &after[..len],
             "  \n \n⤷⤷⤷ＨＨＨＨ\nＨ  \n \n⤷⤷⤷ＨＨＨhＨ\n⤷⤷⤷\n \n⤷⤷⤷ＨＨＨＨＨ\n⤷⤷⤷\n   ".as_bytes()
@@ -671,7 +671,7 @@ mod nonascii_existnl {
 
         let mut after = [0u8; 1024];
         let len = Wrapper::new(before, 4, &mut after)?
-            .wrap_use_style(WrapStyle::NoBreakAppend("⤷⤷⤷", ExistNlPref::TrimTrailSpc))?;
+            .wrap_use_style(WrapStyle::NoBrk(Some("⤷⤷⤷"), ExistNlPref::TrimTrailSpc))?;
         assert_eq!(
             &after[..len],
             "  \nＨＨＨＨ\nＨ  \nＨＨＨhＨ\n⤷⤷⤷\nＨＨＨＨＨ\n⤷⤷⤷\n".as_bytes()

@@ -9,9 +9,9 @@ mod ascii {
     fn _1() -> Result<()> {
         let before = "hello";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(&after[..len], b"hel\n~~~lo");
+        let len =
+            Wrapper::new(before, 3, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], b"hel\nlo");
 
         Ok(())
     }
@@ -19,9 +19,9 @@ mod ascii {
     fn _2() -> Result<()> {
         let before = "hello world";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 4, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(&after[..len], b"hell\n~~~o wo\n~~~rld");
+        let len =
+            Wrapper::new(before, 4, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], b"hell\no wo\nrld");
 
         Ok(())
     }
@@ -29,9 +29,9 @@ mod ascii {
     fn _3() -> Result<()> {
         let before = "hello hello hello";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 4, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(&after[..len], b"hell\n~~~o he\n~~~llo \n~~~hell\n~~~o");
+        let len =
+            Wrapper::new(before, 4, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], b"hell\no he\nllo \nhell\no");
 
         Ok(())
     }
@@ -45,8 +45,8 @@ mod ascii_existnl {
     fn _1() -> Result<()> {
         let before = "hel\nlo";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 3, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(&after[..len], "hel\nlo".as_bytes());
 
         Ok(())
@@ -55,9 +55,9 @@ mod ascii_existnl {
     fn _2() -> Result<()> {
         let before = "hel\nlo \nworld";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(&after[..len], "hel\nlo \nwor\n~~~ld".as_bytes());
+        let len =
+            Wrapper::new(before, 3, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], "hel\nlo \nwor\nld".as_bytes());
 
         Ok(())
     }
@@ -65,8 +65,8 @@ mod ascii_existnl {
     fn _3() -> Result<()> {
         let before = "hel\nlo \nwor\nld";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 3, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(&after[..len], "hel\nlo \nwor\nld".as_bytes());
 
         Ok(())
@@ -75,9 +75,9 @@ mod ascii_existnl {
     fn _4() -> Result<()> {
         let before = "\nhell\no";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(&after[..len], "\nhel\n~~~l\no".as_bytes());
+        let len =
+            Wrapper::new(before, 3, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], "\nhel\nl\no".as_bytes());
 
         Ok(())
     }
@@ -85,9 +85,9 @@ mod ascii_existnl {
     fn _5() -> Result<()> {
         let before = "\nhhhhh\nhhhhh\n";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(&after[..len], "\nhhh\n~~~hh\nhhh\n~~~hh\n".as_bytes());
+        let len =
+            Wrapper::new(before, 3, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], "\nhhh\nhh\nhhh\nhh\n".as_bytes());
 
         Ok(())
     }
@@ -95,9 +95,9 @@ mod ascii_existnl {
     fn _6() -> Result<()> {
         let before = "\nh\nh\nh\nh\nh\nh\nhhhh\n";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(&after[..len], "\nh\nh\nh\nh\nh\nh\nhhh\n~~~h\n".as_bytes());
+        let len =
+            Wrapper::new(before, 3, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], "\nh\nh\nh\nh\nh\nh\nhhh\nh\n".as_bytes());
 
         Ok(())
     }
@@ -105,11 +105,11 @@ mod ascii_existnl {
     fn _7() -> Result<()> {
         let before = "\n\n\n\n\nhhhhh\n\n\n\n\nhhhhh\n\n\n\n\n";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 3, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 3, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "\n\n\n\n\nhhh\n~~~hh\n\n\n\n\nhhh\n~~~hh\n\n\n\n\n".as_bytes()
+            "\n\n\n\n\nhhh\nhh\n\n\n\n\nhhh\nhh\n\n\n\n\n".as_bytes()
         );
 
         Ok(())
@@ -118,8 +118,8 @@ mod ascii_existnl {
     fn _8() -> Result<()> {
         let before = "\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\n";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 1, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 1, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(&after[..len], "\nh\nh\nh\nh\nh\nh\nh\nh\nh\nh\n".as_bytes());
 
         Ok(())
@@ -134,9 +134,9 @@ mod nonascii {
     fn _1() -> Result<()> {
         let before = "ＨＨＨＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(&after[..len], "ＨＨＨ\n~~~ＨＨ".as_bytes());
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], "ＨＨＨ\nＨＨ".as_bytes());
 
         Ok(())
     }
@@ -145,12 +145,9 @@ mod nonascii {
     fn _2() -> Result<()> {
         let before = "ＨＨＨＨＨ ＨＨＨＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(
-            &after[..len],
-            "ＨＨＨ\n~~~ＨＨ Ｈ\n~~~ＨＨＨ\n~~~Ｈ".as_bytes()
-        );
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], "ＨＨＨ\nＨＨ Ｈ\nＨＨＨ\nＨ".as_bytes());
 
         Ok(())
     }
@@ -159,11 +156,11 @@ mod nonascii {
     fn _3() -> Result<()> {
         let before = "ＨＨＨＨＨ ＨＨＨＨＨ ＨＨＨＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "ＨＨＨ\n~~~ＨＨ Ｈ\n~~~ＨＨＨ\n~~~Ｈ ＨＨ\n~~~ＨＨＨ".as_bytes()
+            "ＨＨＨ\nＨＨ Ｈ\nＨＨＨ\nＨ ＨＨ\nＨＨＨ".as_bytes()
         );
 
         Ok(())
@@ -173,11 +170,11 @@ mod nonascii {
     fn _4() -> Result<()> {
         let before = "ＨＨＨＨＨ ＨＨＨＨＨ ＨＨＨＨＨ ＨＨＨＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "ＨＨＨ\n~~~ＨＨ Ｈ\n~~~ＨＨＨ\n~~~Ｈ ＨＨ\n~~~ＨＨＨ \n~~~ＨＨＨ\n~~~ＨＨ".as_bytes()
+            "ＨＨＨ\nＨＨ Ｈ\nＨＨＨ\nＨ ＨＨ\nＨＨＨ \nＨＨＨ\nＨＨ".as_bytes()
         );
 
         Ok(())
@@ -187,11 +184,11 @@ mod nonascii {
     fn _5() -> Result<()> {
         let before = "ＨＨＨＨＨ ＨＨＨhＨ ＨＨＨＨＨ ＨＨＨＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "ＨＨＨ\n~~~ＨＨ Ｈ\n~~~ＨＨhＨ\n~~~ ＨＨＨ\n~~~ＨＨ Ｈ\n~~~ＨＨＨ\n~~~Ｈ".as_bytes()
+            "ＨＨＨ\nＨＨ Ｈ\nＨＨhＨ\n ＨＨＨ\nＨＨ Ｈ\nＨＨＨ\nＨ".as_bytes()
         );
 
         Ok(())
@@ -205,8 +202,8 @@ mod nonascii_existnl {
     fn _1() -> Result<()> {
         let before = "ＨＨＨ\nＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(&after[..len], "ＨＨＨ\nＨＨ".as_bytes());
 
         Ok(())
@@ -215,12 +212,9 @@ mod nonascii_existnl {
     fn _2() -> Result<()> {
         let before = "ＨＨＨ\nＨＨ ＨＨＨＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
-        assert_eq!(
-            &after[..len],
-            "ＨＨＨ\nＨＨ Ｈ\n~~~ＨＨＨ\n~~~Ｈ".as_bytes()
-        );
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
+        assert_eq!(&after[..len], "ＨＨＨ\nＨＨ Ｈ\nＨＨＨ\nＨ".as_bytes());
 
         Ok(())
     }
@@ -228,11 +222,11 @@ mod nonascii_existnl {
     fn _3() -> Result<()> {
         let before = "ＨＨＨ\nＨＨ Ｈ\nＨＨＨＨ ＨＨ\nＨＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "ＨＨＨ\nＨＨ Ｈ\nＨＨＨ\n~~~Ｈ ＨＨ\nＨＨＨ".as_bytes()
+            "ＨＨＨ\nＨＨ Ｈ\nＨＨＨ\nＨ ＨＨ\nＨＨＨ".as_bytes()
         );
 
         Ok(())
@@ -241,11 +235,11 @@ mod nonascii_existnl {
     fn _4() -> Result<()> {
         let before = "ＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨＨ ＨＨ\n\n\nＨＨＨ";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "ＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨ\n~~~Ｈ ＨＨ\n\n\nＨＨＨ".as_bytes()
+            "ＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨ\nＨ ＨＨ\n\n\nＨＨＨ".as_bytes()
         );
 
         Ok(())
@@ -254,11 +248,11 @@ mod nonascii_existnl {
     fn _5() -> Result<()> {
         let before = "\n\n\nＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨＨ ＨＨ\n\n\nＨＨＨ\n\n\n";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "\n\n\nＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨ\n~~~Ｈ ＨＨ\n\n\nＨＨＨ\n\n\n".as_bytes()
+            "\n\n\nＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨ\nＨ ＨＨ\n\n\nＨＨＨ\n\n\n".as_bytes()
         );
 
         Ok(())
@@ -268,11 +262,11 @@ mod nonascii_existnl {
         // similar to _5, but with one ascii
         let before = "\n\n\nＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨh ＨＨ\n\n\nＨＨＨ\n\n\n";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 7, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 7, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "\n\n\nＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨh\n~~~ ＨＨ\n\n\nＨＨＨ\n\n\n".as_bytes()
+            "\n\n\nＨＨＨ\n\n\nＨＨ Ｈ\n\n\nＨＨＨh\n ＨＨ\n\n\nＨＨＨ\n\n\n".as_bytes()
         );
 
         Ok(())
@@ -286,11 +280,11 @@ mod nonascii_existnl {
         //
         let before = "\nＨ\nＨ\nＨ\nＨ\nＨ\nＨ\nＨ\nＨ\nＨ\nＨ\n";
         let mut after = [0u8; 256];
-        let len = Wrapper::new(before, 1, &mut after)?
-            .wrap_use_style(WrapStyle::MayBreakAppend("~~~"))?;
+        let len =
+            Wrapper::new(before, 1, &mut after)?.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(
             &after[..len],
-            "\n\n~~~Ｈ\n\n~~~Ｈ\n\n~~~Ｈ\n\n~~~Ｈ\n\n~~~Ｈ\n\n~~~Ｈ\n\n~~~Ｈ\n\n~~~Ｈ\n\n~~~Ｈ\n\n~~~Ｈ\n".as_bytes()
+            "\n\nＨ\n\nＨ\n\nＨ\n\nＨ\n\nＨ\n\nＨ\n\nＨ\n\nＨ\n\nＨ\n\nＨ\n".as_bytes()
         );
         Ok(())
     }

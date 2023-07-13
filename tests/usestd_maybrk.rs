@@ -12,7 +12,7 @@ mod ascii {
     fn _1() -> Result<()> {
         let before = "hello";
         let mut wrapper = EasyWrapper::new(before, 3)?;
-        let after = wrapper.wrap_use_style(WrapStyle::MayBreak)?;
+        let after = wrapper.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(&after, "hel\nlo");
 
         Ok(())
@@ -22,7 +22,7 @@ mod ascii {
     fn _2() -> Result<()> {
         let before = "hello world";
         let mut wrapper = EasyWrapper::new(before, 4)?;
-        let after = wrapper.wrap_use_style(WrapStyle::MayBreak)?;
+        let after = wrapper.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(&after, "hell\no wo\nrld");
 
         Ok(())
@@ -32,7 +32,7 @@ mod ascii {
     fn _3() -> Result<()> {
         let before = "hello hello hello";
         let mut wrapper = EasyWrapper::new(before, 4)?;
-        let after = wrapper.wrap_use_style(WrapStyle::MayBreak)?;
+        let after = wrapper.wrap_use_style(WrapStyle::MayBrk(None, None))?;
         assert_eq!(&after, "hell\no he\nllo \nhell\no");
 
         Ok(())

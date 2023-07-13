@@ -13,11 +13,11 @@ mod ascii {
         let before = "hhhhh";
 
         let mut wrapper = EasyWrapper::new(before, 3)?;
-        let after = wrapper.wrap_use_style(WrapStyle::MayBreakPrepend("-"))?;
+        let after = wrapper.wrap_use_style(WrapStyle::MayBrk(Some("-"), None))?;
         assert_eq!(&after, "hhh-\nhh");
 
         let mut wrapper = EasyWrapper::new(before, 3)?;
-        let after = wrapper.wrap_use_style(WrapStyle::MayBreakPrepend("⤶"))?;
+        let after = wrapper.wrap_use_style(WrapStyle::MayBrk(Some("⤶"), None))?;
         assert_eq!(&after, "hhh⤶\nhh");
 
         Ok(())
@@ -27,8 +27,8 @@ mod ascii {
     fn _2() -> Result<()> {
         let before = "hhhhh hhhhh";
         let mut wrapper = EasyWrapper::new(before, 3)?;
-        let after = wrapper.wrap_use_style(WrapStyle::MayBreakPrepend("⤶"))?;
-        assert_eq!(&after, "hhh⤶\nhh \nhhh⤶\nhh");
+        let after = wrapper.wrap_use_style(WrapStyle::MayBrk(Some("⤶"), None))?;
+        assert_eq!(&after, "hhh⤶\nhh ⤶\nhhh⤶\nhh");
 
         Ok(())
     }
@@ -37,10 +37,10 @@ mod ascii {
     fn _3() -> Result<()> {
         let before = "hello hello hello";
         let mut wrapper = EasyWrapper::new(before, 4)?;
-        let after = wrapper.wrap_use_style(WrapStyle::MayBreakPrepend("⤶"))?;
-        assert_eq!(&after, "hell⤶\no he⤶\nllo \nhell⤶\no");
+        let after = wrapper.wrap_use_style(WrapStyle::MayBrk(Some("⤶"), None))?;
+        assert_eq!(&after, "hell⤶\no he⤶\nllo ⤶\nhell⤶\no");
 
         Ok(())
     }
-    // -
+    // --
 }

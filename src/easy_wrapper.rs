@@ -9,12 +9,15 @@
 // compliance with either of the licenses.
 //
 
+use crate::ExistNlPref;
 use crate::Result;
 use crate::WrapError;
 use crate::WrapStyle;
 use crate::Wrapper;
 
 use std::{borrow::Cow, string::String, vec::Vec};
+
+use unicode_width::UnicodeWidthStr;
 
 pub struct EasyWrapper<'bf> {
     max_width: usize,
@@ -41,67 +44,59 @@ impl<'bf> EasyWrapper<'bf> {
     }
 
     pub fn wrap<'af>(&'af mut self) -> Result<Cow<'af, str>> {
-        let mut wrapper = Wrapper::new(self.before, self.max_width, &mut self.after)?;
-
-        let af_len = wrapper.wrap_no_break()?;
-
-        Ok(String::from_utf8_lossy(&self.after[..af_len]))
+        self.wrap_use_style(WrapStyle::NoBrk(None, ExistNlPref::KeepTrailSpc))
     }
 
     pub fn wrap_use_style<'af>(&'af mut self, style: WrapStyle) -> Result<Cow<'af, str>> {
         match style {
-            WrapStyle::NoBreak => self.wrap(),
-
-            WrapStyle::NoBreakAppend(append_what, enl_pref) => {
+            WrapStyle::NoBrk(append_what, enl_pref) => {
                 let bf_len = self.before.len();
                 let max_width = self.max_width;
 
-                self.after.resize(bf_len + bf_len * append_what.len(), 0);
-
-                let mut wrapper = Wrapper::new(self.before, self.max_width, &mut self.after)?;
-                let af_len = wrapper.wrap_no_break_append(append_what, enl_pref)?;
-
-                Ok(String::from_utf8_lossy(&self.after[..af_len]))
-            }
-
-            WrapStyle::MayBreak => {
-                let bf_len = self.before.len();
-                let max_width = self.max_width;
-
-                self.after.resize(bf_len + bf_len / max_width, 0);
-
-                let mut wrapper = Wrapper::new(self.before, self.max_width, &mut self.after)?;
-                let af_len = wrapper.wrap_may_break()?;
-
-                Ok(String::from_utf8_lossy(&self.after[..af_len]))
-            }
-
-            WrapStyle::MayBreakPrepend(prepend_what) => {
-                let bf_len = self.before.len();
-                let max_width = self.max_width;
-
+                // FIXME: unnecessary resize after new
                 self.after.resize(
-                    bf_len + bf_len / max_width + prepend_what.len() * (bf_len / max_width),
+                    bf_len
+                        + if let Some(v) = append_what {
+                            bf_len * v.len()
+                        } else {
+                            0
+                        },
                     0,
                 );
 
                 let mut wrapper = Wrapper::new(self.before, self.max_width, &mut self.after)?;
-                let af_len = wrapper.wrap_may_break_prepend(prepend_what)?;
+                let af_len = wrapper.internal_wrap_nobrk(append_what, enl_pref)?;
 
                 Ok(String::from_utf8_lossy(&self.after[..af_len]))
             }
 
-            WrapStyle::MayBreakAppend(append_what) => {
+            WrapStyle::MayBrk(prepend_what, append_what) => {
                 let bf_len = self.before.len();
                 let max_width = self.max_width;
 
+                let prepend_str = if prepend_what.is_none() {
+                    ""
+                } else {
+                    prepend_what.expect("bug")
+                };
+                let append_str = if append_what.is_none() {
+                    ""
+                } else {
+                    append_what.expect("bug")
+                };
                 self.after.resize(
-                    bf_len + bf_len / max_width + append_what.len() * (bf_len / max_width),
+                    bf_len
+                        + if prepend_str.len() == 0 && append_str.len() == 0 {
+                            let bf_width = UnicodeWidthStr::width(self.before);
+                            bf_width / max_width
+                        } else {
+                            bf_len * 1 + bf_len * prepend_str.len() + bf_len * append_str.len()
+                        },
                     0,
                 );
 
                 let mut wrapper = Wrapper::new(self.before, self.max_width, &mut self.after)?;
-                let af_len = wrapper.wrap_may_break_append(append_what)?;
+                let af_len = wrapper.internal_wrap_maybrk(prepend_what, append_what)?;
 
                 Ok(String::from_utf8_lossy(&self.after[..af_len]))
             }
