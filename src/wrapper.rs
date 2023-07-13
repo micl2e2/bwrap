@@ -1,4 +1,4 @@
-// Copyright (C) 2023 Michael Lee
+// Copyright (C) 2023 Michael Lee <imichael2e2@proton.me/...@gmail.com>
 //
 // Licensed under the MIT License <LICENSE-MIT or
 // https://opensource.org/license/mit> or the GNU General Public License,
