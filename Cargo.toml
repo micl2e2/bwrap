@@ -5,6 +5,7 @@ authors = ["Michael Lee <imichael2e2@proton.me/...@gmail.com>"]
 edition = "2021"
 description = "A library for wrapping text."
 repository = "https://github.com/imichael2e2/bwrap"
+homepage = "https://github.com/imichael2e2/bwrap"
 documentation = "https://docs.rs/bwrap"
 license = "MIT OR GPL-3.0-or-later"
 keywords = ["no_std", "wrap", "text", "80-column", "formatting"]
