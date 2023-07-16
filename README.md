@@ -1,19 +1,19 @@
 
 # Table of Contents
 
--   [About](#org2364844)
--   [Benchmark](#org0ef8815)
--   [Examples](#org813bcff)
-    -   [Wrap multiple languages](#orged47e8f)
-        -   [Space-sensitive (English, French, Spanish, etc.)](#org8c70dc1)
-        -   [Space-insensitive (Chinese, Japanese, Thai, etc.)](#orgb6bb815)
-    -   [Wrap and append/prepend](#org1c32e9d)
-        -   [Indentation](#org376dbae)
-        -   [Trailing notation](#orgc454678)
+-   [About](#orga96a3de)
+-   [Benchmark](#org94ca2fe)
+-   [Examples](#orgd41df4b)
+    -   [Wrap multiple languages](#org39c1bf3)
+        -   [Space-sensitive (English, French, Spanish, etc.)](#orgc0b5aba)
+        -   [Space-insensitive (Chinese, Japanese, Thai, etc.)](#orgc58b65a)
+    -   [Wrap and append/prepend](#org33a1643)
+        -   [Indentation](#orgfdf4fd4)
+        -   [Trailing notation](#org33be651)
 
 
 
-<a id="org2364844"></a>
+<a id="orga96a3de"></a>
 
 # About
 
@@ -30,12 +30,13 @@ neither performance nor resource consumption compromises:
 For the sake of readability, we (**b**)etter **wrap** our text.
 
 
-<a id="org0ef8815"></a>
+<a id="org94ca2fe"></a>
 
 # Benchmark
 
-Here several text-wrapping libraries(including bwrap) are benchmarked
-in two dimensions:
+The below is the performance comparison among several text-wrapping
+libraries, including Bwrap. Details about benchmark samples or methods
+are elaborated in [bench-wrap-libs](https://github.com/imichael2e2/bench-wrap-libs).
 
 **Time elapsed:**
 
@@ -45,29 +46,13 @@ in two dimensions:
 
 <img src="result-mempeak.png" width="500"/>
 
-Notes:
 
-1.  Samples are generated from a small paragraph(3085 Bytes) excerpted
-    from GPLv3 license, resulting in files of size ranging from 3 MB to  
-    100 MB.
-
-2.  All libraries are assigned the same job: take samples from STDIN,
-    wrap them with an 80-width limit, then print out the result to
-    STDOUT.
-
-3.  Although not all libraries' results are identical, they are
-    correct enough, i.e. no lines exceed the 80-width limit.
-
-Note: Details about benchmark samples or methods are in
-[bench-wrap-libs](https://github.com/imichael2e2/bench-wrap-libs).
-
-
-<a id="org813bcff"></a>
+<a id="orgd41df4b"></a>
 
 # Examples
 
 
-<a id="orged47e8f"></a>
+<a id="org39c1bf3"></a>
 
 ## Wrap multiple languages
 
@@ -78,7 +63,7 @@ languages that are space-insensitive, such as Chinese, Japanese, Thai
 and so on.
 
 
-<a id="org8c70dc1"></a>
+<a id="orgc0b5aba"></a>
 
 ### Space-sensitive (English, French, Spanish, etc.)
 
@@ -117,7 +102,7 @@ The languages that rely on SPACE(ASCII SPACE).
     TODO
 
 
-<a id="orgb6bb815"></a>
+<a id="orgc58b65a"></a>
 
 ### Space-insensitive (Chinese, Japanese, Thai, etc.)
 
@@ -199,7 +184,7 @@ The languages that does not rely on ASCII SPACE.
         println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org1c32e9d"></a>
+<a id="org33a1643"></a>
 
 ## Wrap and append/prepend
 
@@ -208,7 +193,7 @@ character. With this feature, one can effectively achieve indentation,
 line trailing notation or similar.
 
 
-<a id="org376dbae"></a>
+<a id="orgfdf4fd4"></a>
 
 ### Indentation
 
@@ -242,7 +227,7 @@ Code:
     println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="orgc454678"></a>
+<a id="org33be651"></a>
 
 ### Trailing notation
 
