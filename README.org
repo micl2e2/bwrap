@@ -16,9 +16,20 @@ neither performance nor resource consumption compromises:
 For the sake of readability, we (*b*)etter *wrap* our text.
 
 
-* Performance
+* Benchmark
 
-TODO
+The below is the performance comparison among several text-wrapping
+libraries, including Bwrap. Details about benchmark samples or methods
+are elaborated in [[https://github.com/imichael2e2/bench-wrap-libs][bench-wrap-libs]].
+
+*Time elapsed:*
+
+<img src="result-rtime.png" width="500"/>
+
+*Memory usage:*
+
+<img src="result-mempeak.png" width="500"/>
+
 
 * Examples
 

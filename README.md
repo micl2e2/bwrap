@@ -1,19 +1,19 @@
 
 # Table of Contents
 
--   [About](#orgd7dc316)
--   [Performance](#org74d1ebe)
--   [Examples](#org01c3591)
-    -   [Wrap multiple languages](#org4e054f7)
-        -   [Space-sensitive (English, French, Spanish, etc.)](#org981fcf5)
-        -   [Space-insensitive (Chinese, Japanese, Thai, etc.)](#orgc96508b)
-    -   [Wrap and append/prepend](#org1acb3c9)
-        -   [Indentation](#orgd81be5a)
-        -   [Trailing notation](#orgdc02cf0)
+-   [About](#org2364844)
+-   [Benchmark](#org0ef8815)
+-   [Examples](#org813bcff)
+    -   [Wrap multiple languages](#orged47e8f)
+        -   [Space-sensitive (English, French, Spanish, etc.)](#org8c70dc1)
+        -   [Space-insensitive (Chinese, Japanese, Thai, etc.)](#orgb6bb815)
+    -   [Wrap and append/prepend](#org1c32e9d)
+        -   [Indentation](#org376dbae)
+        -   [Trailing notation](#orgc454678)
 
 
 
-<a id="orgd7dc316"></a>
+<a id="org2364844"></a>
 
 # About
 
@@ -23,26 +23,51 @@ neither performance nor resource consumption compromises:
 
 1.  The time/space complexity is *O(n)* by default, or *O(n(p+a))* if
     there is appending/prepending. (*n*, *p*, *a* is the number of
-    input bytes, prepended bytes, appended bytes respectively)
+    input bytes, prepended bytes, and appended bytes respectively)
 
 2.  No heap allocation happens by default.
 
-For sake of readability, we (**b**)etter **wrap** our text.
+For the sake of readability, we (**b**)etter **wrap** our text.
 
 
-<a id="org74d1ebe"></a>
+<a id="org0ef8815"></a>
 
-# Performance
+# Benchmark
 
-TODO
+Here several text-wrapping libraries(including bwrap) are benchmarked
+in two dimensions:
+
+**Time elapsed:**
+
+<img src="result-rtime.png" width="500"/>
+
+**Memory usage:**
+
+<img src="result-mempeak.png" width="500"/>
+
+Notes:
+
+1.  Samples are generated from a small paragraph(3085 Bytes) excerpted
+    from GPLv3 license, resulting in files of size ranging from 3 MB to  
+    100 MB.
+
+2.  All libraries are assigned the same job: take samples from STDIN,
+    wrap them with an 80-width limit, then print out the result to
+    STDOUT.
+
+3.  Although not all libraries' results are identical, they are
+    correct enough, i.e. no lines exceed the 80-width limit.
+
+Note: Details about benchmark samples or methods are in
+[bench-wrap-libs](https://github.com/imichael2e2/bench-wrap-libs).
 
 
-<a id="org01c3591"></a>
+<a id="org813bcff"></a>
 
 # Examples
 
 
-<a id="org4e054f7"></a>
+<a id="orged47e8f"></a>
 
 ## Wrap multiple languages
 
@@ -53,7 +78,7 @@ languages that are space-insensitive, such as Chinese, Japanese, Thai
 and so on.
 
 
-<a id="org981fcf5"></a>
+<a id="org8c70dc1"></a>
 
 ### Space-sensitive (English, French, Spanish, etc.)
 
@@ -92,7 +117,7 @@ The languages that rely on SPACE(ASCII SPACE).
     TODO
 
 
-<a id="orgc96508b"></a>
+<a id="orgb6bb815"></a>
 
 ### Space-insensitive (Chinese, Japanese, Thai, etc.)
 
@@ -174,7 +199,7 @@ The languages that does not rely on ASCII SPACE.
         println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org1acb3c9"></a>
+<a id="org1c32e9d"></a>
 
 ## Wrap and append/prepend
 
@@ -183,7 +208,7 @@ character. With this feature, one can effectively achieve indentation,
 line trailing notation or similar.
 
 
-<a id="orgd81be5a"></a>
+<a id="org376dbae"></a>
 
 ### Indentation
 
@@ -217,7 +242,7 @@ Code:
     println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="orgdc02cf0"></a>
+<a id="orgc454678"></a>
 
 ### Trailing notation
 
