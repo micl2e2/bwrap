@@ -1,19 +1,20 @@
 
 # Table of Contents
 
--   [About](#orga96a3de)
--   [Benchmark](#org94ca2fe)
--   [Examples](#orgd41df4b)
-    -   [Wrap multiple languages](#org39c1bf3)
-        -   [Space-sensitive (English, French, Spanish, etc.)](#orgc0b5aba)
-        -   [Space-insensitive (Chinese, Japanese, Thai, etc.)](#orgc58b65a)
-    -   [Wrap and append/prepend](#org33a1643)
-        -   [Indentation](#orgfdf4fd4)
-        -   [Trailing notation](#org33be651)
+-   [About](#org2b2db35)
+-   [Benchmark](#org1e16399)
+-   [Examples](#orgec3bffe)
+    -   [Wrap multiple languages](#org0d71331)
+        -   [Space-sensitive (English, French, Spanish, etc.)](#org856dd75)
+        -   [Space-insensitive (Chinese, Japanese, Thai, etc.)](#org152aaee)
+    -   [Wrap and append/prepend](#org7b6498f)
+        -   [Indentation](#org6c46426)
+        -   [Trailing notation](#org236f341)
+-   [License](#org2f3c3cb)
 
 
 
-<a id="orga96a3de"></a>
+<a id="org2b2db35"></a>
 
 # About
 
@@ -30,7 +31,7 @@ neither performance nor resource consumption compromises:
 For the sake of readability, we (**b**)etter **wrap** our text.
 
 
-<a id="org94ca2fe"></a>
+<a id="org1e16399"></a>
 
 # Benchmark
 
@@ -47,12 +48,12 @@ are elaborated in [bench-wrap-libs](https://github.com/imichael2e2/bench-wrap-li
 <img src="result-mempeak.png" width="500"/>
 
 
-<a id="orgd41df4b"></a>
+<a id="orgec3bffe"></a>
 
 # Examples
 
 
-<a id="org39c1bf3"></a>
+<a id="org0d71331"></a>
 
 ## Wrap multiple languages
 
@@ -63,7 +64,7 @@ languages that are space-insensitive, such as Chinese, Japanese, Thai
 and so on.
 
 
-<a id="orgc0b5aba"></a>
+<a id="org856dd75"></a>
 
 ### Space-sensitive (English, French, Spanish, etc.)
 
@@ -102,7 +103,7 @@ The languages that rely on SPACE(ASCII SPACE).
     TODO
 
 
-<a id="orgc58b65a"></a>
+<a id="org152aaee"></a>
 
 ### Space-insensitive (Chinese, Japanese, Thai, etc.)
 
@@ -184,7 +185,7 @@ The languages that does not rely on ASCII SPACE.
         println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org33a1643"></a>
+<a id="org7b6498f"></a>
 
 ## Wrap and append/prepend
 
@@ -193,7 +194,7 @@ character. With this feature, one can effectively achieve indentation,
 line trailing notation or similar.
 
 
-<a id="orgfdf4fd4"></a>
+<a id="org6c46426"></a>
 
 ### Indentation
 
@@ -227,7 +228,7 @@ Code:
     println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org33be651"></a>
+<a id="org236f341"></a>
 
 ### Trailing notation
 
@@ -257,4 +258,13 @@ Code:
     let mut w = EasyWrapper::new(line, 10).unwrap();
     let wrapped = w.wrap_use_style(MayBrk(Some(" |"), None)).unwrap();
     println!("WRAPPED:\n\n{}", wrapped);
+
+
+<a id="org2f3c3cb"></a>
+
+# License
+
+Bwrap can be licensed under either [MIT License](https://github.com/imichael2e2/bwrap/blob/master/LICENSE-MIT) or [GNU General
+Public License Version 3.0](https://github.com/imichael2e2/bwrap/blob/master/LICENSE-GPL). Which one you choose is totally up to
+you. 
 

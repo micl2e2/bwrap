@@ -267,3 +267,10 @@ Code:
 
 #+end_src
 
+
+
+* License
+
+Bwrap can be licensed under either [[https://github.com/imichael2e2/bwrap/blob/master/LICENSE-MIT][MIT License]] or [[https://github.com/imichael2e2/bwrap/blob/master/LICENSE-GPL][GNU General
+Public License Version 3.0]]. Which one you choose is totally up to
+you. 

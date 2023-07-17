@@ -1,9 +1,9 @@
 [package]
 name = "bwrap"
-version = "0.1.0-beta6"
+version = "1.0.0"
 authors = ["Michael Lee <imichael2e2@proton.me/...@gmail.com>"]
 edition = "2021"
-description = "A library for wrapping text."
+description = "A fast, lightweight, embedded environment-friendly library for wrapping text."
 repository = "https://github.com/imichael2e2/bwrap"
 homepage = "https://github.com/imichael2e2/bwrap"
 documentation = "https://docs.rs/bwrap"
