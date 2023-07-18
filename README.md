@@ -1,43 +1,42 @@
 
 # Table of Contents
 
--   [About](#org2b2db35)
--   [Benchmark](#org1e16399)
--   [Examples](#orgec3bffe)
-    -   [Wrap multiple languages](#org0d71331)
-        -   [Space-sensitive (English, French, Spanish, etc.)](#org856dd75)
-        -   [Space-insensitive (Chinese, Japanese, Thai, etc.)](#org152aaee)
-    -   [Wrap and append/prepend](#org7b6498f)
-        -   [Indentation](#org6c46426)
-        -   [Trailing notation](#org236f341)
--   [License](#org2f3c3cb)
+-   [About](#org93f5d9c)
+-   [Benchmark](#orgb0ff21e)
+-   [Examples](#org61e3c17)
+    -   [Multiple languages](#orga36d67a)
+        -   [English, Ukrainian, Greek, etc.](#orgb1d97e2)
+        -   [Chinese, Japanese, Thai, etc.](#org1667331)
+    -   [Append/prepend](#org0a3014c)
+        -   [Indentation](#org3c097d9)
+        -   [Trailing notation](#org1a27677)
+-   [License](#org14c42c4)
 
 
 
-<a id="org2b2db35"></a>
+<a id="org93f5d9c"></a>
 
 # About
 
-Bwrap is a lightweight, embedded environment-friendly library for
-wrapping text. While Bwrap offers great flexibility in wrapping text,
-neither performance nor resource consumption compromises:
+Bwrap is a fast, lightweight, embedded environment-friendly library
+for wrapping text. While Bwrap offers great flexibility in wrapping
+text, neither resource consumption nor performance compromises: 
 
-1.  The time/space complexity is *O(n)* by default, or *O(n(p+a))* if
+1.  No heap allocation happens by default.
+
+2.  The time/space complexity is *O(n)* by default, or *O(n(p+a))* if
     there is appending/prepending. (*n*, *p*, *a* is the number of
     input bytes, prepended bytes, and appended bytes respectively)
-
-2.  No heap allocation happens by default.
 
 For the sake of readability, we (**b**)etter **wrap** our text.
 
 
-<a id="org1e16399"></a>
+<a id="orgb0ff21e"></a>
 
 # Benchmark
 
-The below is the performance comparison among several text-wrapping
-libraries, including Bwrap. Details about benchmark samples or methods
-are elaborated in [bench-wrap-libs](https://github.com/imichael2e2/bench-wrap-libs).
+Below are the performance comparisons among several text-wrapping
+libraries in different dimensions:
 
 **Time elapsed:**
 
@@ -47,224 +46,233 @@ are elaborated in [bench-wrap-libs](https://github.com/imichael2e2/bench-wrap-li
 
 <img src="result-mempeak.png" width="500"/>
 
+Note:
 
-<a id="orgec3bffe"></a>
+1.  Details about benchmark samples or methods are elaborated in
+    [bench-wrap-libs](https://github.com/imichael2e2/bench-wrap-libs).
+
+2.  The benchmark results above are obtained on an i7u/16G machine and
+    are for reference only. Different machines or idle system resource
+    might generate different results.
+
+
+<a id="org61e3c17"></a>
 
 # Examples
 
 
-<a id="org0d71331"></a>
+<a id="orga36d67a"></a>
 
-## Wrap multiple languages
+## Multiple languages
 
-Bwrap categorizes languages into two categories, the first is for the
-languages that depend on ASCII SPACE to delimit words, such as
-English, French, Italian, Spanish and so on. The second is for the
-languages that are space-insensitive, such as Chinese, Japanese, Thai
-and so on.
+Bwrap suuport multiple languages, it categorizes languages into two
+categories: **space-sensitive** and **space-insensitive**. The former is
+for the languages that depend on ASCII SPACE to delimit words, such as
+English, Ukrainian, Greek and so on. The latter is for the languages
+that are space-insensitive, such as Chinese, Japanese, Thai and so on.
 
 
-<a id="org856dd75"></a>
+<a id="orgb1d97e2"></a>
 
-### Space-sensitive (English, French, Spanish, etc.)
-
-The languages that rely on SPACE(ASCII SPACE).
+### English, Ukrainian, Greek, etc.
 
 -   English
 
-        
-        ORIGINAL:
-        
+    Original:
+    
         one two three four five six seven eight nine ten one two three four five six seven eight nine ten one two three four five six seven eight nine ten
-        
-        WRAPPED:
-        
+    
+    **Wrapped**:
+    
         one two three four five six seven eight nine ten
         one two three four five six seven eight nine ten
         one two three four five six seven eight nine ten
     
-    Code:
+    Source code:
     
-        use bwrap::EasyWrapper;
-        
         let line = "one two three four five six seven eight nine ten one two three four five six seven eight nine ten one two three four five six seven eight nine ten";
         println!("ORIGINAL:\n\n{}\n", line);
-        
-        let mut w = EasyWrapper::new(line, 50).unwrap();
+        let mut w = bwrap::EasyWrapper::new(line, 50).unwrap();
         let wrapped = w.wrap().unwrap();
         println!("WRAPPED:\n\n{}", wrapped);
 
--   French
+-   Ukrainian
 
-    TODO
+    Original:
+    
+        один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять
+    
+    **Wrapped**:
+    
+        один два три чотири п'ять шість сім вісім дев'ять десять
+        один два три чотири п'ять шість сім вісім дев'ять десять
+        один два три чотири п'ять шість сім вісім дев'ять десять
+    
+    Source code:
+    
+        let line = "один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять";
+        println!("ORIGINAL:\n\n{}\n", line);
+        let mut w = bwrap::EasyWrapper::new(line, 60).unwrap();
+        let wrapped = w.wrap().unwrap();
+        println!("WRAPPED:\n\n{}", wrapped);
 
--   Spanish
+-   Greek
 
-    TODO
+    Original:
+    
+        ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα
+    
+    **Wrapped**:
+    
+        ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα
+        ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα
+        ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα
+    
+    Source code:
+    
+        let line = "один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять";
+        println!("ORIGINAL:\n\n{}\n", line);
+        let mut w = bwrap::EasyWrapper::new(line, 60).unwrap();
+        let wrapped = w.wrap().unwrap();
+        println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org152aaee"></a>
+<a id="org1667331"></a>
 
-### Space-insensitive (Chinese, Japanese, Thai, etc.)
-
-The languages that does not rely on ASCII SPACE.
+### Chinese, Japanese, Thai, etc.
 
 -   Chinese
 
-        
-        ORIGINAL:
-        
+    Original:
+    
         一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十
-        
-        WRAPPED:
-        
+    
+    **Wrapped**:
+    
         一二三四五六七八九十
         一二三四五六七八九十
         一二三四五六七八九十
     
-    Code: 
+    Source code: 
     
-        
-        use bwrap::{EasyWrapper, WrapStyle::MayBrk};
-        
         let line = "一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十";
         println!("ORIGINAL:\n\n{}\n", line);
-        
-        let mut w = EasyWrapper::new(line, 20).unwrap();
-        let wrapped = w.wrap_use_style(MayBrk(None, None)).unwrap();
+        let mut w = bwrap::EasyWrapper::new(line, 20).unwrap();
+        let wrapped = w.wrap_use_style(bwrap::WrapStyle::MayBrk(None, None)).unwrap();
         println!("WRAPPED:\n\n{}", wrapped);
 
 -   Japanese
 
-        
-        ORIGINAL:
-        
+    Original:
+    
         ありがとうございますありがとうございますありがとうございます
-        
-        WRAPPED:
-        
+    
+    **Wrapped**:
+    
         ありがとうございます
         ありがとうございます
         ありがとうございます
     
-    Code:
+    Source code:
     
-        
-        use bwrap::{EasyWrapper, WrapStyle::MayBrk};
-        
         let line = "ありがとうございますありがとうございますありがとうございます";
         println!("ORIGINAL:\n\n{}\n", line);
-        
-        let mut w = EasyWrapper::new(line, 10).unwrap();
-        let wrapped = w.wrap_use_style(MayBrk(None, None)).unwrap();
+        let mut w = bwrap::EasyWrapper::new(line, 10).unwrap();
+        let wrapped = w.wrap_use_style(bwrap::WrapStyle::MayBrk(None, None)).unwrap();
         println!("WRAPPED:\n\n{}", wrapped);
 
 -   Thai
 
-        
-        ORIGINAL:
-        
+    Original:
+    
         หนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบหนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบหนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบ
-        
-        WRAPPED:
-        
+    
+    **Wrapped**:
+    
         หนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบ
         หนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบ
         หนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบ
     
-    Code: 
+    Source code:
     
-        
-        use bwrap::{EasyWrapper, WrapStyle::MayBrk};
-        
         let line = "หนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบหนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบหนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบ";
         println!("ORIGINAL:\n\n{}\n", line);
-        
-        let mut w = EasyWrapper::new(line, 25).unwrap();
-        let wrapped = w.wrap_use_style(MayBrk(None, None)).unwrap();
+        let mut w = bwrap::EasyWrapper::new(line, 25).unwrap();
+        let wrapped = w.wrap_use_style(bwrap::WrapStyle::MayBrk(None, None)).unwrap();
         println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org7b6498f"></a>
+<a id="org0a3014c"></a>
 
-## Wrap and append/prepend
+## Append/prepend
 
 Bwrap can append or prepend whatever string to newly added newline
 character. With this feature, one can effectively achieve indentation,
 line trailing notation or similar.
 
 
-<a id="org6c46426"></a>
+<a id="org3c097d9"></a>
 
 ### Indentation
 
-    
-    ORIGINAL:
-    
+Original:
+
     Here is our schedule:
     - Do A, and do B, and do C, and do D, and do E, and do F
     - Do G, and do H, and do I, and do J, and do K, and do L
-    
-    WRAPPED:
-    
+
+**Wrapped**:
+
     Here is our schedule:
     - Do A, and do B, and do C, and do
       D, and do E, and do F
     - Do G, and do H, and do I, and do
       J, and do K, and do L
 
-Code:
+Source code:
 
-    
     use bwrap::{EasyWrapper, ExistNlPref, WrapStyle::NoBrk};
     
-    let line = "Here is our schedule:\n- Do A, and do B, and do C, and do D, and do E, and do F\n- Do G, and\
-    	    do H, and do I, and do J, and do K, and do L";
+    let line = "Here is our schedule:\n- Do A, and do B, and do C, and do D, and do E, and do F\n- Do G, and do H, and do I, and do J, and do K, and do L";
     println!("ORIGINAL:\n\n{}\n", line);
-    
     let mut w = EasyWrapper::new(line, 35).unwrap();
-    let wrapped = w.wrap_use_style(NoBrk(Some("  "), ExistNlPref::KeepTrailSpc))
-        .unwrap();
+    let wrapped = w.wrap_use_style(NoBrk(Some("  "), ExistNlPref::KeepTrailSpc)).unwrap();
     println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org236f341"></a>
+<a id="org1a27677"></a>
 
 ### Trailing notation
 
-    
-    ORIGINAL:
-    
+Original:
+
     VGhpcyBpcyBhIHNlY3JldCBtZXNzYWdlLCBwbGVhc2UgZGVsZXRlIGFmdGVyIHJlYWQK
-    
-    WRAPPED:
-    
+
+**Wrapped**:
+
     VGhpcyBpcy |
     BhIHNlY3Jl |
     dCBtZXNzYW |
     dlLCBwbGVh |
     c2UgZGVsZX |
     RlIGFmdGVy |
-    IHJlYWQK
+    IHJlYWQK  
 
-Code:
+Source code:
 
-    
     use bwrap::{EasyWrapper, WrapStyle::MayBrk};
     
     let line = "VGhpcyBpcyBhIHNlY3JldCBtZXNzYWdlLCBwbGVhc2UgZGVsZXRlIGFmdGVyIHJlYWQK";
     println!("ORIGINAL:\n\n{}\n", line);
-    
     let mut w = EasyWrapper::new(line, 10).unwrap();
     let wrapped = w.wrap_use_style(MayBrk(Some(" |"), None)).unwrap();
     println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org2f3c3cb"></a>
+<a id="org14c42c4"></a>
 
 # License
 
 Bwrap can be licensed under either [MIT License](https://github.com/imichael2e2/bwrap/blob/master/LICENSE-MIT) or [GNU General
-Public License Version 3.0](https://github.com/imichael2e2/bwrap/blob/master/LICENSE-GPL). Which one you choose is totally up to
-you. 
+Public License Version 3.0](https://github.com/imichael2e2/bwrap/blob/master/LICENSE-GPL). The choice is up to the recipients.
 
