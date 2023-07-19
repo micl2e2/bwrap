@@ -151,7 +151,7 @@ Source code:
 #+begin_src rust
 let line = "一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十";
 println!("ORIGINAL:\n\n{}\n", line);
-println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 20));
+println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 20));
 #+end_src
 
 
@@ -176,7 +176,7 @@ Source code:
 #+begin_src rust
 let line = "ありがとうございますありがとうございますありがとうございます";
 println!("ORIGINAL:\n\n{}\n", line);
-println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 10));
+println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 10));
 #+end_src
 
 
@@ -201,7 +201,7 @@ Source code:
 #+begin_src rust
 let line = "หนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบหนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบหนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบ";
 println!("ORIGINAL:\n\n{}\n", line);
-println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 25));
+println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 25));
 #+end_src
 
 

@@ -1,6 +1,6 @@
 [package]
 name = "bwrap"
-version = "1.2.0"
+version = "1.2.1"
 authors = ["Michael Lee <imichael2e2@proton.me/...@gmail.com>"]
 edition = "2021"
 description = """A fast, lightweight, embedded environment-friendly library for
@@ -12,6 +12,7 @@ license = "MIT OR GPL-3.0-or-later"
 keywords = ["no-std", "wrap", "line-feed", "80-column", "formatting"]
 categories = ["no-std", "text-processing", "embedded", "accessibility"]
 exclude = ["*.bak"]
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
