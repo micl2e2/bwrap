@@ -69,7 +69,7 @@ one two three four five six seven eight nine ten
 
 Source code:
 
-#+begin_src
+#+begin_src rust
 let line = "one two three four five six seven eight nine ten one two three four five six seven eight nine ten one two three four five six seven eight nine ten";
 println!("ORIGINAL:\n\n{}\n", line);
 println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 50));
@@ -94,7 +94,7 @@ Original:
 
 Source code:
 
-#+begin_src
+#+begin_src rust
 let line = "один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять";
 println!("ORIGINAL:\n\n{}\n", line);
 println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 60));
@@ -120,7 +120,7 @@ Original:
 
 Source code:
 
-#+begin_src
+#+begin_src rust
 let line = "ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα";
 println!("ORIGINAL:\n\n{}\n", line);
 println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 51));
@@ -148,12 +148,10 @@ Original:
 
 Source code: 
 
-#+begin_src
+#+begin_src rust
 let line = "一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十";
 println!("ORIGINAL:\n\n{}\n", line);
-let mut w = bwrap::EasyWrapper::new(line, 20).unwrap();
-let wrapped = w.wrap_use_style(bwrap::WrapStyle::MayBrk(None, None)).unwrap();
-println!("WRAPPED:\n\n{}", wrapped);
+println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 20));
 #+end_src
 
 
@@ -175,12 +173,10 @@ Original:
 
 Source code:
 
-#+begin_src
+#+begin_src rust
 let line = "ありがとうございますありがとうございますありがとうございます";
 println!("ORIGINAL:\n\n{}\n", line);
-let mut w = bwrap::EasyWrapper::new(line, 10).unwrap();
-let wrapped = w.wrap_use_style(bwrap::WrapStyle::MayBrk(None, None)).unwrap();
-println!("WRAPPED:\n\n{}", wrapped);
+println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 10));
 #+end_src
 
 
@@ -202,12 +198,10 @@ Original:
 
 Source code:
 
-#+begin_src
+#+begin_src rust
 let line = "หนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบหนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบหนึ่งสองสามสี่ห้าหกเจ็ดแปดเก้าสิบ";
 println!("ORIGINAL:\n\n{}\n", line);
-let mut w = bwrap::EasyWrapper::new(line, 25).unwrap();
-let wrapped = w.wrap_use_style(bwrap::WrapStyle::MayBrk(None, None)).unwrap();
-println!("WRAPPED:\n\n{}", wrapped);
+println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 25));
 #+end_src
 
 
@@ -239,7 +233,7 @@ Here is our schedule:
 
 Source code:
 
-#+begin_src
+#+begin_src rust
 use bwrap::{EasyWrapper, ExistNlPref, WrapStyle::NoBrk};
 
 let line = "Here is our schedule:\n- Do A, and do B, and do C, and do D, and do E, and do F\n- Do G, and do H, and do I, and do J, and do K, and do L";
@@ -273,7 +267,7 @@ IHJlYWQK
 
 Source code:
 
-#+begin_src
+#+begin_src rust
 use bwrap::{EasyWrapper, WrapStyle::MayBrk};
 
 let line = "VGhpcyBpcyBhIHNlY3JldCBtZXNzYWdlLCBwbGVhc2UgZGVsZXRlIGFmdGVyIHJlYWQK";
@@ -287,4 +281,4 @@ println!("WRAPPED:\n\n{}", wrapped);
 * License
 
 Bwrap can be licensed under either [[https://github.com/imichael2e2/bwrap/blob/master/LICENSE-MIT][MIT License]] or [[https://github.com/imichael2e2/bwrap/blob/master/LICENSE-GPL][GNU General
-Public License Version 3.0]]. The choice is up to the recipients.
+Public License Version 3.0]]. The choice is up to the recipient.
