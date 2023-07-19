@@ -1,6 +1,6 @@
 [package]
 name = "bwrap"
-version = "1.1.0"
+version = "1.1.1"
 authors = ["Michael Lee <imichael2e2@proton.me/...@gmail.com>"]
 edition = "2021"
 description = """A fast, lightweight, embedded environment-friendly library for
