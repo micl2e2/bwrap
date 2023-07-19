@@ -1,19 +1,21 @@
-use bwrap::Result;
-
 // all intput and output are identical to corresponding ones in nostd tests
 
 #[cfg(feature = "use_std")]
 mod ascii {
     use super::*;
     use bwrap::EasyWrapper;
+    use bwrap::Result;
 
     #[test]
     fn _1() -> Result<()> {
         let before = "hhhhh";
+        let expected = "hhhhh";
+
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
-        assert_eq!(&after, "hhhhh");
-        assert_eq!(bwrap::wrap!(before, 3), "hhhhh");
+
+        assert_eq!(&after, expected);
+        assert_eq!(bwrap::wrap!(before, 3), expected);
 
         Ok(())
     }
@@ -21,10 +23,13 @@ mod ascii {
     #[test]
     fn _2() -> Result<()> {
         let before = "hhhhh hhhhh";
+        let expected = "hhhhh\nhhhhh";
+
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
-        assert_eq!(&after, "hhhhh\nhhhhh");
+        assert_eq!(&after, expected);
+        assert_eq!(bwrap::wrap!(before, 3), expected);
 
         Ok(())
     }
@@ -32,10 +37,13 @@ mod ascii {
     #[test]
     fn _3() -> Result<()> {
         let before = "hh     hhh";
+        let expected = "hh \nhhh";
+
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
-        assert_eq!(&after, "hh \nhhh");
+        assert_eq!(&after, expected);
+        assert_eq!(bwrap::wrap!(before, 3), expected);
 
         Ok(())
     }
@@ -43,10 +51,13 @@ mod ascii {
     #[test]
     fn _4() -> Result<()> {
         let before = "hhhhh hhhhh hhhhh";
+        let expected = "hhhhh\nhhhhh\nhhhhh";
+
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
-        assert_eq!(&after, "hhhhh\nhhhhh\nhhhhh");
+        assert_eq!(&after, expected);
+        assert_eq!(bwrap::wrap!(before, 3), expected);
 
         Ok(())
     }
@@ -54,10 +65,13 @@ mod ascii {
     #[test]
     fn _5() -> Result<()> {
         let before = "hhhhh   hhhhh   hhhhh";
+        let expected = "hhhhh\nhhhhh\nhhhhh";
+
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
-        assert_eq!(&after, "hhhhh\nhhhhh\nhhhhh");
+        assert_eq!(&after, expected);
+        assert_eq!(bwrap::wrap!(before, 3), expected);
 
         Ok(())
     }
@@ -65,10 +79,13 @@ mod ascii {
     #[test]
     fn _6() -> Result<()> {
         let before = "   hhhhh   hhhhh   hhhhh   ";
+        let expected = "  \nhhhhh\nhhhhh\nhhhhh\n";
+
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
-        assert_eq!(&after, "  \nhhhhh\nhhhhh\nhhhhh\n");
+        assert_eq!(&after, expected);
+        assert_eq!(bwrap::wrap!(before, 3), expected);
 
         Ok(())
     }
