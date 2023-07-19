@@ -3,6 +3,16 @@ mod stdonly {
     use crate::EasyWrapper;
     use crate::WrapStyle;
 
+    ///
+    /// Wrap text with `N`-width limit, `N` defaults to 80 if omitted.
+    ///
+    /// Note that the style `WrapStyle::NoBrk` is in use, assuming no
+    /// appending or prepending. This suits for the space-sensitive
+    /// languages, such as English, French, German, etc.
+    ///
+    /// # Panics
+    ///
+    /// Panics if input string consists of invalid UTF8 bytes.
     #[macro_export]
     macro_rules! wrap {
         ($s:expr) => {{
