@@ -13,6 +13,7 @@ mod ascii {
         let mut wrapper = EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
         assert_eq!(&after, "hhhhh");
+        assert_eq!(bwrap::wrap!(before, 3), "hhhhh");
 
         Ok(())
     }

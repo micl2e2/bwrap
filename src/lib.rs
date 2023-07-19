@@ -33,3 +33,6 @@ pub use wrapper::Wrapper;
 #[cfg_attr(doc_cfg, doc(cfg(feature = "use_std")))]
 #[cfg(feature = "use_std")]
 pub use easy_wrapper::EasyWrapper;
+
+#[macro_use]
+mod public_macros;
