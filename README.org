@@ -72,9 +72,7 @@ Source code:
 #+begin_src
 let line = "one two three four five six seven eight nine ten one two three four five six seven eight nine ten one two three four five six seven eight nine ten";
 println!("ORIGINAL:\n\n{}\n", line);
-let mut w = bwrap::EasyWrapper::new(line, 50).unwrap();
-let wrapped = w.wrap().unwrap();
-println!("WRAPPED:\n\n{}", wrapped);
+println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 50));
 #+end_src
 
 
@@ -99,9 +97,7 @@ Source code:
 #+begin_src
 let line = "один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять";
 println!("ORIGINAL:\n\n{}\n", line);
-let mut w = bwrap::EasyWrapper::new(line, 60).unwrap();
-let wrapped = w.wrap().unwrap();
-println!("WRAPPED:\n\n{}", wrapped);
+println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 60));
 #+end_src
 
 
@@ -125,11 +121,9 @@ Original:
 Source code:
 
 #+begin_src
-let line = "один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять";
+let line = "ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα";
 println!("ORIGINAL:\n\n{}\n", line);
-let mut w = bwrap::EasyWrapper::new(line, 60).unwrap();
-let wrapped = w.wrap().unwrap();
-println!("WRAPPED:\n\n{}", wrapped);
+println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 51));
 #+end_src
 
 

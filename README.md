@@ -1,20 +1,20 @@
 
 # Table of Contents
 
--   [About](#org93f5d9c)
--   [Benchmark](#orgb0ff21e)
--   [Examples](#org61e3c17)
-    -   [Multiple languages](#orga36d67a)
-        -   [English, Ukrainian, Greek, etc.](#orgb1d97e2)
-        -   [Chinese, Japanese, Thai, etc.](#org1667331)
-    -   [Append/prepend](#org0a3014c)
-        -   [Indentation](#org3c097d9)
-        -   [Trailing notation](#org1a27677)
--   [License](#org14c42c4)
+-   [About](#org8903a3c)
+-   [Benchmark](#org58b3687)
+-   [Examples](#orgac3f2b8)
+    -   [Multiple languages](#org9d259cf)
+        -   [English, Ukrainian, Greek, etc.](#orgcd80dbd)
+        -   [Chinese, Japanese, Thai, etc.](#org2ce2185)
+    -   [Append/prepend](#org869ba6e)
+        -   [Indentation](#org3248f83)
+        -   [Trailing notation](#orgad88a98)
+-   [License](#org2ca36a1)
 
 
 
-<a id="org93f5d9c"></a>
+<a id="org8903a3c"></a>
 
 # About
 
@@ -31,7 +31,7 @@ text, neither resource consumption nor performance compromises:
 For the sake of readability, we (**b**)etter **wrap** our text.
 
 
-<a id="orgb0ff21e"></a>
+<a id="org58b3687"></a>
 
 # Benchmark
 
@@ -56,12 +56,12 @@ Note:
     might generate different results.
 
 
-<a id="org61e3c17"></a>
+<a id="orgac3f2b8"></a>
 
 # Examples
 
 
-<a id="orga36d67a"></a>
+<a id="org9d259cf"></a>
 
 ## Multiple languages
 
@@ -72,7 +72,7 @@ English, Ukrainian, Greek and so on. The latter is for the languages
 that are space-insensitive, such as Chinese, Japanese, Thai and so on.
 
 
-<a id="orgb1d97e2"></a>
+<a id="orgcd80dbd"></a>
 
 ### English, Ukrainian, Greek, etc.
 
@@ -92,9 +92,7 @@ that are space-insensitive, such as Chinese, Japanese, Thai and so on.
     
         let line = "one two three four five six seven eight nine ten one two three four five six seven eight nine ten one two three four five six seven eight nine ten";
         println!("ORIGINAL:\n\n{}\n", line);
-        let mut w = bwrap::EasyWrapper::new(line, 50).unwrap();
-        let wrapped = w.wrap().unwrap();
-        println!("WRAPPED:\n\n{}", wrapped);
+        println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 50));
 
 -   Ukrainian
 
@@ -112,9 +110,7 @@ that are space-insensitive, such as Chinese, Japanese, Thai and so on.
     
         let line = "один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять";
         println!("ORIGINAL:\n\n{}\n", line);
-        let mut w = bwrap::EasyWrapper::new(line, 60).unwrap();
-        let wrapped = w.wrap().unwrap();
-        println!("WRAPPED:\n\n{}", wrapped);
+        println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 60));
 
 -   Greek
 
@@ -130,14 +126,12 @@ that are space-insensitive, such as Chinese, Japanese, Thai and so on.
     
     Source code:
     
-        let line = "один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять один два три чотири п'ять шість сім вісім дев'ять десять";
+        let line = "ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα ένα δύο τρία τέσσερα πέντε έξι επτά οκτώ εννέα δέκα";
         println!("ORIGINAL:\n\n{}\n", line);
-        let mut w = bwrap::EasyWrapper::new(line, 60).unwrap();
-        let wrapped = w.wrap().unwrap();
-        println!("WRAPPED:\n\n{}", wrapped);
+        println!("WRAPPED:\n\n{}", bwrap::wrap!(line, 51));
 
 
-<a id="org1667331"></a>
+<a id="org2ce2185"></a>
 
 ### Chinese, Japanese, Thai, etc.
 
@@ -202,7 +196,7 @@ that are space-insensitive, such as Chinese, Japanese, Thai and so on.
         println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org0a3014c"></a>
+<a id="org869ba6e"></a>
 
 ## Append/prepend
 
@@ -211,7 +205,7 @@ character. With this feature, one can effectively achieve indentation,
 line trailing notation or similar.
 
 
-<a id="org3c097d9"></a>
+<a id="org3248f83"></a>
 
 ### Indentation
 
@@ -240,7 +234,7 @@ Source code:
     println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org1a27677"></a>
+<a id="orgad88a98"></a>
 
 ### Trailing notation
 
@@ -269,7 +263,7 @@ Source code:
     println!("WRAPPED:\n\n{}", wrapped);
 
 
-<a id="org14c42c4"></a>
+<a id="org2ca36a1"></a>
 
 # License
 
