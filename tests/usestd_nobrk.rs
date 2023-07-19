@@ -3,7 +3,6 @@
 #[cfg(feature = "use_std")]
 mod ascii {
     use super::*;
-    use bwrap::EasyWrapper;
     use bwrap::Result;
 
     #[test]
@@ -11,7 +10,7 @@ mod ascii {
         let before = "hhhhh";
         let expected = "hhhhh";
 
-        let mut wrapper = EasyWrapper::new(before, 3)?;
+        let mut wrapper = bwrap::EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
         assert_eq!(&after, expected);
@@ -25,7 +24,7 @@ mod ascii {
         let before = "hhhhh hhhhh";
         let expected = "hhhhh\nhhhhh";
 
-        let mut wrapper = EasyWrapper::new(before, 3)?;
+        let mut wrapper = bwrap::EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
         assert_eq!(&after, expected);
@@ -39,7 +38,7 @@ mod ascii {
         let before = "hh     hhh";
         let expected = "hh \nhhh";
 
-        let mut wrapper = EasyWrapper::new(before, 3)?;
+        let mut wrapper = bwrap::EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
         assert_eq!(&after, expected);
@@ -53,7 +52,7 @@ mod ascii {
         let before = "hhhhh hhhhh hhhhh";
         let expected = "hhhhh\nhhhhh\nhhhhh";
 
-        let mut wrapper = EasyWrapper::new(before, 3)?;
+        let mut wrapper = bwrap::EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
         assert_eq!(&after, expected);
@@ -67,7 +66,7 @@ mod ascii {
         let before = "hhhhh   hhhhh   hhhhh";
         let expected = "hhhhh\nhhhhh\nhhhhh";
 
-        let mut wrapper = EasyWrapper::new(before, 3)?;
+        let mut wrapper = bwrap::EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
         assert_eq!(&after, expected);
@@ -81,7 +80,7 @@ mod ascii {
         let before = "   hhhhh   hhhhh   hhhhh   ";
         let expected = "  \nhhhhh\nhhhhh\nhhhhh\n";
 
-        let mut wrapper = EasyWrapper::new(before, 3)?;
+        let mut wrapper = bwrap::EasyWrapper::new(before, 3)?;
         let after = wrapper.wrap()?;
 
         assert_eq!(&after, expected);

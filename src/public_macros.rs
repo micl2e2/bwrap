@@ -1,8 +1,5 @@
 #[cfg(feature = "use_std")]
 mod stdonly {
-    use crate::EasyWrapper;
-    use crate::WrapStyle;
-
     ///
     /// Wrap text with `N`-width limit, `N` defaults to 80 if omitted.
     ///
@@ -16,11 +13,13 @@ mod stdonly {
     #[macro_export]
     macro_rules! wrap {
         ($s:expr) => {{
+            use bwrap::EasyWrapper;
             let mut wrapper = EasyWrapper::new($s, 80).expect("bwrap init");
             let w = wrapper.wrap().expect("bwrap wrap");
             String::from(w)
         }};
         ($s:expr, $mw:expr) => {{
+            use bwrap::EasyWrapper;
             let mut wrapper = EasyWrapper::new($s, $mw).expect("bwrap init");
             let w = wrapper.wrap().expect("bwrap wrap");
             String::from(w)
