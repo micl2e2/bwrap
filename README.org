@@ -34,9 +34,10 @@ Note:
 1. Details about benchmark samples or methods are elaborated in
    [[https://github.com/imichael2e2/bench-wrap-libs][bench-wrap-libs]].
 
-2. The benchmark results above are obtained on an i7u/16G machine and
-   are for reference only. Different machines or idle system resource
-   might generate different results.
+2. The data above is recorded on an i5-3337u/12G machine
+   and is for reference only. It is possible to have a slightly
+   different result on a different machine or with different idle
+   system resource.
 
 
 * Examples
