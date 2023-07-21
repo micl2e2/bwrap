@@ -183,7 +183,7 @@ Bwrap suuport multiple languages, it categorizes languages into two categories: 
     ```rust
     let line = "ありがとうございますありがとうございますありがとうございます";
     println!("ORIGINAL:\n\n{}\n", line);
-    println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 10));
+    println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 20));
     ```
 
 -   Thai
