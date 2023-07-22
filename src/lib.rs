@@ -9,8 +9,9 @@
 // compliance with either of the licenses.
 //
 
-#![cfg_attr(doc_cfg, feature(doc_cfg))]
 #![no_std]
+#![cfg_attr(doc_cfg, feature(doc_cfg))]
+// #![feature(doc_auto_cfg)] // DEBUG ONLY
 
 #[cfg(any(feature = "use_std"))]
 extern crate std;

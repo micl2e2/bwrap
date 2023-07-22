@@ -1,3 +1,4 @@
+#[cfg_attr(doc_cfg, doc(cfg(feature = "use_std")))]
 #[cfg(feature = "use_std")]
 mod stdonly {
     ///
