@@ -40,7 +40,12 @@ Note:
    system resource.
 
 
-* Examples
+* Features
+
+=use_std=: Use Rust standard library(libstd) for automatic memory
+management.
+
+* Examples(=use_std= feature)
 
 ** Multiple languages
 
@@ -177,7 +182,7 @@ Source code:
 #+begin_src rust
 let line = "ありがとうございますありがとうございますありがとうございます";
 println!("ORIGINAL:\n\n{}\n", line);
-println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 10));
+println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 20));
 #+end_src
 
 
@@ -283,3 +288,4 @@ println!("WRAPPED:\n\n{}", wrapped);
 
 Bwrap can be licensed under either [[https://github.com/imichael2e2/bwrap/blob/master/LICENSE-MIT][MIT License]] or [[https://github.com/imichael2e2/bwrap/blob/master/LICENSE-GPL][GNU General
 Public License Version 3.0]]. The choice is up to the recipient.
+

@@ -1,17 +1,18 @@
-- [About](#org0eece13)
-- [Benchmark](#orgb0788de)
-- [Examples](#orgcee2ec3)
-  - [Multiple languages](#orgc38d3b6)
-    - [English, Ukrainian, Greek, etc.](#org3471bf1)
-    - [Chinese, Japanese, Thai, etc.](#org9866902)
-  - [Append/prepend](#org3300cd3)
-    - [Indentation](#orgca55d32)
-    - [Trailing notation](#orgb07406f)
-- [License](#org0e4bb09)
+- [About](#org71c9f44)
+- [Benchmark](#org0e2097f)
+- [Features](#orgf7c3364)
+- [Examples(`use_std` feature)](#org9a24038)
+  - [Multiple languages](#org4780be6)
+    - [English, Ukrainian, Greek, etc.](#org0e9b0e8)
+    - [Chinese, Japanese, Thai, etc.](#org3478d81)
+  - [Append/prepend](#org18aca0f)
+    - [Indentation](#org500ef41)
+    - [Trailing notation](#org1fd42b9)
+- [License](#org4c63b79)
 
 
 
-<a id="org0eece13"></a>
+<a id="org71c9f44"></a>
 
 # About
 
@@ -24,7 +25,7 @@ Bwrap is a fast, lightweight, embedded environment-friendly library for wrapping
 For the sake of readability, we (**b**)etter **wrap** our text.
 
 
-<a id="orgb0788de"></a>
+<a id="org0e2097f"></a>
 
 # Benchmark
 
@@ -45,19 +46,26 @@ Note:
 2.  The data above is recorded on an i5-3337u/12G machine and is for reference only. It is possible to have a slightly different result on a different machine or with different idle system resource.
 
 
-<a id="orgcee2ec3"></a>
+<a id="orgf7c3364"></a>
 
-# Examples
+# Features
+
+`use_std`: Use Rust standard library(libstd) for automatic memory management.
 
 
-<a id="orgc38d3b6"></a>
+<a id="org9a24038"></a>
+
+# Examples(`use_std` feature)
+
+
+<a id="org4780be6"></a>
 
 ## Multiple languages
 
 Bwrap suuport multiple languages, it categorizes languages into two categories: **space-sensitive** and **space-insensitive**. The former is for the languages that depend on ASCII SPACE to delimit words, such as English, Ukrainian, Greek and so on. The latter is for the languages that are space-insensitive, such as Chinese, Japanese, Thai and so on.
 
 
-<a id="org3471bf1"></a>
+<a id="org0e9b0e8"></a>
 
 ### English, Ukrainian, Greek, etc.
 
@@ -134,7 +142,7 @@ Bwrap suuport multiple languages, it categorizes languages into two categories: 
     ```
 
 
-<a id="org9866902"></a>
+<a id="org3478d81"></a>
 
 ### Chinese, Japanese, Thai, etc.
 
@@ -211,14 +219,14 @@ Bwrap suuport multiple languages, it categorizes languages into two categories: 
     ```
 
 
-<a id="org3300cd3"></a>
+<a id="org18aca0f"></a>
 
 ## Append/prepend
 
 Bwrap can append or prepend whatever string to newly added newline character. With this feature, one can effectively achieve indentation, line trailing notation or similar.
 
 
-<a id="orgca55d32"></a>
+<a id="org500ef41"></a>
 
 ### Indentation
 
@@ -253,7 +261,7 @@ println!("WRAPPED:\n\n{}", wrapped);
 ```
 
 
-<a id="orgb07406f"></a>
+<a id="org1fd42b9"></a>
 
 ### Trailing notation
 
@@ -288,7 +296,7 @@ println!("WRAPPED:\n\n{}", wrapped);
 ```
 
 
-<a id="org0e4bb09"></a>
+<a id="org4c63b79"></a>
 
 # License
 
