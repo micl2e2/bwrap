@@ -1,12 +1,12 @@
 [package]
 name = "bwrap"
-version = "1.2.1"
-authors = ["Michael Lee <imichael2e2@proton.me/...@gmail.com>"]
+version = "1.2.2"
+authors = ["Michael Lee <micl2e2@proton.me>"]
 edition = "2021"
 description = """A fast, lightweight, embedded environment-friendly library for
 wrapping text."""
-repository = "https://github.com/imichael2e2/bwrap"
-homepage = "https://github.com/imichael2e2/bwrap"
+repository = "https://github.com/micl2e2/bwrap"
+homepage = "https://github.com/micl2e2/bwrap"
 documentation = "https://docs.rs/bwrap"
 license = "MIT OR GPL-3.0-or-later"
 keywords = ["no-std", "wrap", "line-feed", "80-column", "formatting"]
