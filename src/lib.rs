@@ -9,9 +9,25 @@
 // compliance with either of the licenses.
 //
 
+//!
+//! A fast, lightweight, embedded systems-friendly library for wrapping text.
+//! While Bwrap offers great flexibility in wrapping text, neither resource
+//! consumption nor performance compromises:
+//!
+//! 1. No heap allocation happens by default.
+//! 2. The time/space complexity is *O(n)* by default, or *O(n(p+a))* if there
+//! is appending/prepending. (n, p, a is the number of input/prepended/appended
+//! bytes respectively)
+//!
+//! For the sake of readability, we (**b**)etter **wrap** our text.
+//!
+//! See more [examples](https://github.com/micl2e2/bwrap) or
+//! [benchmark](https://github.com/micl2e2/bwrap).
+//!
+
 #![no_std]
-#![cfg_attr(doc_cfg, feature(doc_cfg))]
-// #![feature(doc_auto_cfg)] // DEBUG ONLY
+// #![cfg_attr(doc_cfg, feature(doc_cfg))]
+#![feature(doc_auto_cfg)] // DEBUG ONLY
 
 #[cfg(any(feature = "use_std"))]
 extern crate std;

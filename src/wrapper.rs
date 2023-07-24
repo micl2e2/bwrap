@@ -19,17 +19,60 @@ use crate::auxbuf::ExisSpcBuf;
 use crate::auxbuf::HypoNlBuf;
 use crate::auxbuf::HypoNlKind;
 
+///
+/// The wrapping style used by [`Wrapper`].
+///
+/// Bwrap categorizes the user input into two categories:
+///
+/// 1. space-sensitive
+/// 2. space-insensitive
+///
+/// **"space-sensitive"** suits for the languages that depend on ASCII
+/// SPACE to delimit words, such as English, Ukrainian, Greek, etc.
+/// **"space-insensitive"** suits for otherwise languages, such as Chinese,
+/// Japanese, Thai, etc.
 pub enum WrapStyle<'a> {
+    ///
+    /// Wrapping text will **never** break the original semantics. This is true
+    /// for those "space-sensitive" languages.
+    ///
+    /// If the first value is not `None`, it will be appended to all newly
+    /// inserted newlines. The second value instructs the wrap how to deal
+    /// with all existing newlines.
     NoBrk(Option<&'a str>, ExistNlPref),
+
+    ///
+    /// Wrapping text **may** break the original semantics. For example, the
+    /// wrapping `We need an example` with 15-width limit results in
+    ///
+    /// ```ignored
+    /// We need an exam
+    /// ple
+    /// ```
+    ///
+    /// If the first value is not `None`, it will be prepended to all newly
+    /// inserted newlines. If the second value is not `None`, it will be
+    /// appended to all newly inserted newlines.
     MayBrk(Option<&'a str>, Option<&'a str>),
 }
 
+///
+/// Preference for existing newlines.
 #[derive(PartialEq)]
 pub enum ExistNlPref {
+    ///
+    /// Trim all ASCII SPACEs following each existing newline character.
     TrimTrailSpc,
+
+    ///
+    /// Keep all ASCII SPACEs following each existing newline character.
     KeepTrailSpc,
 }
 
+///
+/// A type for the actual wrapping tasks.
+///
+/// Note that this requires manual memory management.
 pub struct Wrapper<'a, 'b> {
     max_width: usize,
     before: &'a str,
@@ -37,6 +80,11 @@ pub struct Wrapper<'a, 'b> {
 }
 
 impl<'bf, 'af> Wrapper<'bf, 'af> {
+    ///
+    /// Initialize an Wrapper instance.
+    ///
+    /// # Errors
+    /// If output buffer size is insufficient to hold the final output bytes.
     pub fn new(before: &'bf str, max_width: usize, after: &'af mut [u8]) -> Result<Self> {
         let bf_len = before.len();
         let af_len = after.len();
@@ -60,10 +108,20 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
         })
     }
 
+    ///
+    /// A convient alias for
+    /// `wrap_use_style(WrapStyle::NoBrk(None, ExistNlPref::KeepTrailSpc)`.
     pub fn wrap(&mut self) -> Result<usize> {
         self.wrap_use_style(WrapStyle::NoBrk(None, ExistNlPref::KeepTrailSpc))
     }
 
+    ///
+    /// Perform wrapping tasks.
+    ///
+    /// Note that this method will mutate the output buffer.
+    ///
+    /// # Errors
+    /// If output buffer size is insufficient to hold the final output bytes.
     pub fn wrap_use_style(&mut self, style: WrapStyle) -> Result<usize> {
         match style {
             WrapStyle::NoBrk(append_what, enl_pref) => {

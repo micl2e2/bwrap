@@ -9,6 +9,8 @@
 // compliance with either of the licenses.
 //
 
+///
+/// The internal errors.
 #[derive(Debug)]
 pub enum WrapError {
     InsufficentBufferSize(usize, usize, usize),

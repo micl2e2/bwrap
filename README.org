@@ -32,7 +32,7 @@ libraries in different dimensions:
 Note:
 
 1. Details about benchmark samples or methods are elaborated in
-   [[https://github.com/imichael2e2/bench-wrap-libs][bench-wrap-libs]].
+   [[https://github.com/micl2e2/bench-wrap-libs][bench-wrap-libs]].
 
 2. The data above is recorded on an i5-3337u/12G machine
    and is for reference only. It is possible to have a slightly
@@ -286,6 +286,6 @@ println!("WRAPPED:\n\n{}", wrapped);
 
 * License
 
-Bwrap can be licensed under either [[https://github.com/imichael2e2/bwrap/blob/master/LICENSE-MIT][MIT License]] or [[https://github.com/imichael2e2/bwrap/blob/master/LICENSE-GPL][GNU General
+Bwrap can be licensed under either [[https://github.com/micl2e2/bwrap/blob/master/LICENSE-MIT][MIT License]] or [[https://github.com/micl2e2/bwrap/blob/master/LICENSE-GPL][GNU General
 Public License Version 3.0]]. The choice is up to the recipient.
 

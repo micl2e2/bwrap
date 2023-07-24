@@ -19,6 +19,10 @@ use std::{borrow::Cow, string::String, vec::Vec};
 
 use unicode_width::UnicodeWidthStr;
 
+///
+/// A type for the actual wrapping tasks.
+///
+/// Note that libstd is in use for automatic memory management.
 pub struct EasyWrapper<'bf> {
     max_width: usize,
     before: &'bf str,
