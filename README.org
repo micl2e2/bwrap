@@ -34,7 +34,7 @@ Note:
 1. Details about benchmark samples or methods are elaborated in
    [[https://github.com/micl2e2/bench-wrap-libs][bench-wrap-libs]].
 
-2. The data above is recorded on an i5-3337u/12G machine
+2. The data above is obtained on an i5-3337u/8G machine
    and is for reference only. It is possible to have a slightly
    different result on a different machine or with different idle
    system resource.
