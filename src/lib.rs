@@ -21,8 +21,13 @@
 //!
 //! For the sake of readability, we (**b**)etter **wrap** our text.
 //!
-//! See more [examples](https://github.com/micl2e2/bwrap) or
-//! [benchmark](https://github.com/micl2e2/bwrap).
+//! # Examples/Benchmark
+//!
+//! See more details in [repository](https://github.com/micl2e2/bwrap).
+//!
+//! # Features
+//!
+//! `use_std`: Use standard library for automatic memory management.
 //!
 
 #![no_std]
