@@ -1,18 +1,18 @@
-- [About](#org2e67431)
-- [Benchmark](#org8723b20)
-- [Features](#org02fd908)
-- [Examples(`use_std` feature)](#orga0ae0d0)
-  - [Multiple languages](#orgeb034f4)
-    - [English, Ukrainian, Greek, etc.](#org078ae75)
-    - [Chinese, Japanese, Thai, etc.](#orga3a36da)
-  - [Append/prepend](#org4fbfcf7)
-    - [Indentation](#orgb8417a1)
-    - [Trailing notation](#org1af0b9e)
-- [License](#org88c1808)
+- [About](#org0a1acf4)
+- [Benchmark](#orgcc8d114)
+- [Features](#org3ea081d)
+- [Examples(`use_std` feature)](#org5827407)
+  - [Multiple languages](#org84fc340)
+    - [English, Ukrainian, Greek, etc.](#orgd2fb3d0)
+    - [Chinese, Japanese, Thai, etc.](#orgfd3a763)
+  - [Append/prepend](#org8d66105)
+    - [Indentation](#orgc092995)
+    - [Trailing notation](#org0d9ae27)
+- [License](#org7e72f65)
 
 
 
-<a id="org2e67431"></a>
+<a id="org0a1acf4"></a>
 
 # About
 
@@ -25,47 +25,47 @@ Bwrap is a fast, lightweight, embedded environment-friendly library for wrapping
 For the sake of readability, we (**b**)etter **wrap** our text.
 
 
-<a id="org8723b20"></a>
+<a id="orgcc8d114"></a>
 
 # Benchmark
 
 Below are the performance comparisons among several text-wrapping libraries in different dimensions:
 
-**Time elapsed:**
+**Time:**
 
 <img src="result-rtime.png" width="500"/>
 
-**Memory usage:**
+**Memory:**
 
 <img src="result-mempeak.png" width="500"/>
 
 Note:
 
-1.  Details about benchmark samples or methods are elaborated in [bench-wrap-libs](https://github.com/micl2e2/bench-wrap-libs).
+1.  The benchmark is reproduciable, details about benchmark samples or methods are elaborated in [bench-wrap-libs](https://github.com/micl2e2/bench-wrap-libs).
 
 2.  The data above is obtained on an i5-3337u/8G machine and is for reference only. It is possible to have a slightly different result on a different machine or with different idle system resource.
 
 
-<a id="org02fd908"></a>
+<a id="org3ea081d"></a>
 
 # Features
 
 `use_std`: Use Rust standard library(libstd) for automatic memory management.
 
 
-<a id="orga0ae0d0"></a>
+<a id="org5827407"></a>
 
 # Examples(`use_std` feature)
 
 
-<a id="orgeb034f4"></a>
+<a id="org84fc340"></a>
 
 ## Multiple languages
 
 Bwrap suuport multiple languages, it categorizes languages into two categories: **space-sensitive** and **space-insensitive**. The former is for the languages that depend on ASCII SPACE to delimit words, such as English, Ukrainian, Greek and so on. The latter is for the languages that are space-insensitive, such as Chinese, Japanese, Thai and so on.
 
 
-<a id="org078ae75"></a>
+<a id="orgd2fb3d0"></a>
 
 ### English, Ukrainian, Greek, etc.
 
@@ -142,7 +142,7 @@ Bwrap suuport multiple languages, it categorizes languages into two categories: 
     ```
 
 
-<a id="orga3a36da"></a>
+<a id="orgfd3a763"></a>
 
 ### Chinese, Japanese, Thai, etc.
 
@@ -219,14 +219,14 @@ Bwrap suuport multiple languages, it categorizes languages into two categories: 
     ```
 
 
-<a id="org4fbfcf7"></a>
+<a id="org8d66105"></a>
 
 ## Append/prepend
 
 Bwrap can append or prepend whatever string to newly added newline character. With this feature, one can effectively achieve indentation, line trailing notation or similar.
 
 
-<a id="orgb8417a1"></a>
+<a id="orgc092995"></a>
 
 ### Indentation
 
@@ -251,17 +251,13 @@ Here is our schedule:
 Source code:
 
 ```rust
-use bwrap::{EasyWrapper, ExistNlPref, WrapStyle::NoBrk};
-
 let line = "Here is our schedule:\n- Do A, and do B, and do C, and do D, and do E, and do F\n- Do G, and do H, and do I, and do J, and do K, and do L";
 println!("ORIGINAL:\n\n{}\n", line);
-let mut w = EasyWrapper::new(line, 35).unwrap();
-let wrapped = w.wrap_use_style(NoBrk(Some("  "), ExistNlPref::KeepTrailSpc)).unwrap();
-println!("WRAPPED:\n\n{}", wrapped);
+println!("WRAPPED:\n\n{}", bwrap::wrap_nobrk!(line, 35, "  "));
 ```
 
 
-<a id="org1af0b9e"></a>
+<a id="org0d9ae27"></a>
 
 ### Trailing notation
 
@@ -286,17 +282,13 @@ IHJlYWQK
 Source code:
 
 ```rust
-use bwrap::{EasyWrapper, WrapStyle::MayBrk};
-
 let line = "VGhpcyBpcyBhIHNlY3JldCBtZXNzYWdlLCBwbGVhc2UgZGVsZXRlIGFmdGVyIHJlYWQK";
 println!("ORIGINAL:\n\n{}\n", line);
-let mut w = EasyWrapper::new(line, 10).unwrap();
-let wrapped = w.wrap_use_style(MayBrk(Some(" |"), None)).unwrap();
-println!("WRAPPED:\n\n{}", wrapped);
+println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 10, " |"));
 ```
 
 
-<a id="org88c1808"></a>
+<a id="org7e72f65"></a>
 
 # License
 
