@@ -1,28 +1,43 @@
+2023-07-31  Michael Lee  <micl2e2@proton.me>
+
+	* RELEASE: 1.3.0, 4b00e78ad591157221e7d22c403c7b3dded26198
+
+	BACKWARD_COMPATIBLE_CHANGES:
+	- Introduce `wrap_nobrk` macro.
+	- Change rust-version from default to 1.47.
+	- Change rust edition from 2021 to 2018.
+
+	BACKWARD_COMPATIBLE_FIXES:
+	- Handle append/prepend in `wrap_maybrk` macro.
+	- More documentation.
+	- Add doctest examples, disable doctest.
+	- Add dependencies' licenses.
+
 2023-07-24  Michael Lee  <micl2e2@proton.me>
 
 	* RELEASE: 1.2.3, 4ab0261b42986bf62d9daccd4ced0a27a1278b45
 
 	BACKWARD_COMPATIBLE_FIXES:
-	1. Add source-level documentation for all structs and functions.
-	2. Correct width for Japanese example, by Kyohei Uto <im@kyoheiu.dev>.
+	- Add source-level documentation for all structs and functions.
+	- Correct width for Japanese example, by Kyohei Uto <im@kyoheiu.dev>.
 
 2023-07-19  Michael Lee  <micl2e2@proton.me>
 
 	* RELEASE: 1.2.0, e29ad092e988129c650f84098a1fc718fd2bfd7b
 
 	BACKWARD_COMPATIBLE_CHANGES:
-	1. Introduce a convenient macro `wrap_maybrk!` for space-insensitive
+	- Introduce a convenient macro `wrap_maybrk!` for space-insensitive
 	languages.
 
 	* RELEASE: 1.1.1, f4762063c3288d36b1e2a61546d2dbd3ab447c61
 
 	BACKWARD_COMPATIBLE_FIXES:
-	1. Fix "EasyWrapper not in scope" issue.
+	- Fix "EasyWrapper not in scope" issue.
 
 	* RELEASE: 1.1.0, e759ef0c2ec072c34170c4e41d998cde00029268
 
 	BACKWARD_COMPATIBLE_CHANGES:
-	1. Introduce a convenient macro `wrap!` for space-sensitive languages.
+	- Introduce a convenient macro `wrap!` for space-sensitive languages.
 
 2023-07-17  Michael Lee  <micl2e2@proton.me>
 
