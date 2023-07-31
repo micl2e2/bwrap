@@ -16,6 +16,9 @@ readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+doctest = false # doctests need use_std
+
 [features]
 use_std = []
 

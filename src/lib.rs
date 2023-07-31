@@ -11,6 +11,7 @@
 
 //!
 //! A fast, lightweight, embedded systems-friendly library for wrapping text.
+//!
 //! While Bwrap offers great flexibility in wrapping text, neither resource
 //! consumption nor performance compromises:
 //!
@@ -21,13 +22,94 @@
 //!
 //! For the sake of readability, we (**b**)etter **wrap** our text.
 //!
-//! # Examples/Benchmark
-//!
-//! See more details in [repository](https://github.com/micl2e2/bwrap).
-//!
 //! # Features
 //!
-//! `use_std`: Use standard library for automatic memory management.
+//! `use_std`: Use standard library for automatic memory management. (disable by default)
+//!
+//! # Examples
+//!
+//! _Note: These examples require `use_std` feature_.
+//!
+//! ---
+//!
+//! Wrap a long line of text:
+//!
+//! ```
+//! let original = "
+//! one two three one two three one two three
+//! ";
+//! let wrapped = bwrap::wrap!(original, 13);
+//!
+//! let expected = "
+//! one two three
+//! one two three
+//! one two three
+//! ";
+//! assert_eq!(wrapped, expected);
+//! ```
+//!
+//! Format CLI error messages:
+//!
+//! ```
+//! let original = "
+//! error: TLS handshake erorr.
+//!   tip: Probably because of instable network connection, please try these solutions: Retry the connection; Use another different network; Use another version of TLS; Reboot your system; Reinstall your system; Give up.
+//! ";
+//! let wrapped = bwrap::wrap_nobrk!(original, 38, "       ");
+//!
+//! let expected = "
+//! error: TLS handshake erorr.
+//!   tip: Probably because of instable
+//!        network connection, please try these
+//!        solutions: Retry the connection; Use
+//!        another different network; Use another
+//!        version of TLS; Reboot your system;
+//!        Reinstall your system; Give up.
+//! ";
+//! assert_eq!(wrapped, expected);
+//! ```
+//!
+//! Format a bullet list:
+//! ```
+//! let original = "
+//! Here is our schedule:
+//! - Do A, and do B, and do C, and do D, and do E, and do F
+//! - Do G, and do H, and do I, and do J, and do K, and do L
+//! ";
+//! let wrapped = bwrap::wrap_nobrk!(original, 35, "  ");
+//!
+//! let expected = "
+//! Here is our schedule:
+//! - Do A, and do B, and do C, and do
+//!   D, and do E, and do F
+//! - Do G, and do H, and do I, and do
+//!   J, and do K, and do L
+//! ";
+//! assert_eq!(wrapped, expected);
+//! ```
+//!
+//! Trailing notation:
+//!
+//! ```
+//! let original = "
+//! VGhpcyBpcyBhIHNlY3JldCBtZXNzYWdlLCBwbGVhc2UgZGVsZXRlIGFmdGVyIHJlYWQK
+//! ";
+//! let wrapped = bwrap::wrap_maybrk!(original, 10, " |");
+//!
+//! let expected = "
+//! VGhpcyBpcy |
+//! BhIHNlY3Jl |
+//! dCBtZXNzYW |
+//! dlLCBwbGVh |
+//! c2UgZGVsZX |
+//! RlIGFmdGVy |
+//! IHJlYWQK
+//! ";
+//! assert_eq!(wrapped, expected);
+//! ```
+//!
+//! More exmaples/benchmark can be found in [repository](https://github.com/micl2e2/bwrap).
+//!
 //!
 
 #![no_std]
