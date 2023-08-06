@@ -1,18 +1,18 @@
-- [About](#org0a1acf4)
-- [Benchmark](#orgcc8d114)
-- [Features](#org3ea081d)
-- [Examples(`use_std` feature)](#org5827407)
-  - [Multiple languages](#org84fc340)
-    - [English, Ukrainian, Greek, etc.](#orgd2fb3d0)
-    - [Chinese, Japanese, Thai, etc.](#orgfd3a763)
-  - [Append/prepend](#org8d66105)
-    - [Indentation](#orgc092995)
-    - [Trailing notation](#org0d9ae27)
-- [License](#org7e72f65)
+- [About](#orgb411f80)
+- [Benchmark](#org21fb849)
+- [Features](#org848055c)
+- [Examples(`use_std` feature)](#org4f1dd2e)
+  - [Multiple languages](#orgf2ab08a)
+    - [English, Ukrainian, Greek, etc.](#org9b93103)
+    - [Chinese, Japanese, Thai, etc.](#org535d23e)
+  - [Append/prepend](#org2cfcc2f)
+    - [Indentation](#org48d98c9)
+    - [Trailing notation](#org1885599)
+- [License](#orgcee0517)
 
 
 
-<a id="org0a1acf4"></a>
+<a id="orgb411f80"></a>
 
 # About
 
@@ -25,7 +25,7 @@ Bwrap is a fast, lightweight, embedded environment-friendly library for wrapping
 For the sake of readability, we (**b**)etter **wrap** our text.
 
 
-<a id="orgcc8d114"></a>
+<a id="org21fb849"></a>
 
 # Benchmark
 
@@ -33,11 +33,11 @@ Below are the performance comparisons among several text-wrapping libraries in d
 
 **Time:**
 
-<img src="result-rtime.png" width="500"/>
+<img src="![img](https://github.com/micl2e2/bench-wrap-libs/blob/master/examples/result-rtime.png)" width="500"/>
 
 **Memory:**
 
-<img src="result-mempeak.png" width="500"/>
+<img src="![img](https://github.com/micl2e2/bench-wrap-libs/blob/master/examples/result-mempeak.png)" width="500"/>
 
 Note:
 
@@ -46,26 +46,26 @@ Note:
 2.  The data above is obtained on an i5-3337u/8G machine and is for reference only. It is possible to have a slightly different result on a different machine or with different idle system resource.
 
 
-<a id="org3ea081d"></a>
+<a id="org848055c"></a>
 
 # Features
 
 `use_std`: Use Rust standard library(libstd) for automatic memory management.
 
 
-<a id="org5827407"></a>
+<a id="org4f1dd2e"></a>
 
 # Examples(`use_std` feature)
 
 
-<a id="org84fc340"></a>
+<a id="orgf2ab08a"></a>
 
 ## Multiple languages
 
 Bwrap suuport multiple languages, it categorizes languages into two categories: **space-sensitive** and **space-insensitive**. The former is for the languages that depend on ASCII SPACE to delimit words, such as English, Ukrainian, Greek and so on. The latter is for the languages that are space-insensitive, such as Chinese, Japanese, Thai and so on.
 
 
-<a id="orgd2fb3d0"></a>
+<a id="org9b93103"></a>
 
 ### English, Ukrainian, Greek, etc.
 
@@ -142,7 +142,7 @@ Bwrap suuport multiple languages, it categorizes languages into two categories: 
     ```
 
 
-<a id="orgfd3a763"></a>
+<a id="org535d23e"></a>
 
 ### Chinese, Japanese, Thai, etc.
 
@@ -219,14 +219,14 @@ Bwrap suuport multiple languages, it categorizes languages into two categories: 
     ```
 
 
-<a id="org8d66105"></a>
+<a id="org2cfcc2f"></a>
 
 ## Append/prepend
 
 Bwrap can append or prepend whatever string to newly added newline character. With this feature, one can effectively achieve indentation, line trailing notation or similar.
 
 
-<a id="orgc092995"></a>
+<a id="org48d98c9"></a>
 
 ### Indentation
 
@@ -257,7 +257,7 @@ println!("WRAPPED:\n\n{}", bwrap::wrap_nobrk!(line, 35, "  "));
 ```
 
 
-<a id="org0d9ae27"></a>
+<a id="org1885599"></a>
 
 ### Trailing notation
 
@@ -288,7 +288,7 @@ println!("WRAPPED:\n\n{}", bwrap::wrap_maybrk!(line, 10, " |"));
 ```
 
 
-<a id="org7e72f65"></a>
+<a id="orgcee0517"></a>
 
 # License
 
