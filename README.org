@@ -23,15 +23,11 @@ libraries in different dimensions:
 
 *Time:*
 
-<img
-src="https://github.com/micl2e2/bench-wrap-libs/blob/master/examples/result-rtime.png"
-width="500"/> 
+https://github.com/micl2e2/bench-wrap-libs/blob/master/examples/result-rtime.png]]
 
 *Memory:*
 
-<img
-src="https://github.com/micl2e2/bench-wrap-libs/blob/master/examples/result-mempeak.png"
-width="500"/> 
+[[https://github.com/micl2e2/bench-wrap-libs/blob/master/examples/result-mempeak.png]]
 
 Note:
 
