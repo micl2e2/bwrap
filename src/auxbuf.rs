@@ -130,7 +130,7 @@ impl<'a> HypoNlBuf<'a> {
     }
 
     pub(crate) fn last(&self) -> &(usize, usize, HypoNlKind) {
-        &self.inner
+        self.inner
     }
 }
 
@@ -159,6 +159,6 @@ impl<'a> ExisSpcBuf<'a> {
     }
 
     pub(crate) fn last(&self) -> &(usize, usize) {
-        &self.inner
+        self.inner
     }
 }
