@@ -193,7 +193,7 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
 
         for ci in 1..bf_len + 1 {
             let is_last_cp = ci == bf_len;
-
+            #[allow(clippy::nonminimal_bool)]
             if is_last_cp
                 || (!is_last_cp && (bf_bytes[ci] < 0b10000000 || bf_bytes[ci] >= 0b11000000))
             {
@@ -319,6 +319,7 @@ impl<'bf, 'af> Wrapper<'bf, 'af> {
         for ci in 1..bf_len + 1 {
             let is_last_cp = ci == bf_len;
 
+            #[allow(clippy::nonminimal_bool)]
             if is_last_cp
                 || (!is_last_cp && (bf_bytes[ci] < 0b10000000 || bf_bytes[ci] >= 0b11000000))
             {

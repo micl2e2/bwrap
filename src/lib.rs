@@ -116,7 +116,7 @@
 #![cfg_attr(doc_cfg, feature(doc_cfg))]
 // #![feature(doc_auto_cfg)] // DEBUG ONLY
 
-#[cfg(any(feature = "use_std"))]
+#[cfg(feature = "use_std")]
 extern crate std;
 
 mod error;

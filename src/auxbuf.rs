@@ -42,6 +42,7 @@ impl<'a> ByteSlcBuf<'a> {
         let many_len = bytes.len();
         self.inner.copy_within(begi..self.nexi, begi + many_len);
         self.nexi += many_len;
+	#[allow(clippy::manual_memcpy)]
         for i in 0..many_len {
             self.inner[begi + i] = bytes[i];
         }
@@ -50,6 +51,7 @@ impl<'a> ByteSlcBuf<'a> {
     pub(crate) fn ppush_within(&mut self, prep_bytes: &[u8], byte: u8, begi: usize, endi: usize) {
         let prep_len = prep_bytes.len();
         self.inner.copy_within(begi..endi, begi + prep_len + 1);
+	#[allow(clippy::manual_memcpy)]
         for i in begi..begi + prep_len {
             self.inner[i] = prep_bytes[i - begi];
         }
