@@ -1,4 +1,4 @@
-# Bwrap
+# bwrap
 
 [![crates][api_crate]][url_crate] [![unsafe][api_unsafe]][url_unsafe]
 [![dep_status][api_depstatus]][url_depstatus] ![api_license][url_license]
@@ -326,7 +326,7 @@ This is not an exhaustive list:
 # License
 
 bwrap can be licensed under either [MIT
-License](https://github.com/micl2e2/bwrap/blob/master/LICENSE-MIT) or
+License](https://github.com/micl2e2/bwrap/blob/master/LICENSE-MIT) **or**
 [GNU General Public License Version
 3.0](https://github.com/micl2e2/bwrap/blob/master/LICENSE-GPL). The
-choice is **totally** up to the recipient. 
+choice is **entirely** up to you. 
