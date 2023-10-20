@@ -47,12 +47,6 @@ impl<'a> ByteSlcBuf<'a> {
         }
     }
 
-    pub(crate) fn push_within(&mut self, byte: u8, begi: usize, endi: usize) {
-        self.inner.copy_within(begi..endi, begi + 1);
-        self.inner[begi] = byte;
-        self.nexi += 1;
-    }
-
     pub(crate) fn ppush_within(&mut self, prep_bytes: &[u8], byte: u8, begi: usize, endi: usize) {
         let prep_len = prep_bytes.len();
         self.inner.copy_within(begi..endi, begi + prep_len + 1);
